@@ -3,39 +3,84 @@ import React from "react";
 import { LibraryItem } from "@/types/library";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Eye, Edit, Sparkles, FileText, Wrench, LayoutTemplate, Book, Lightbulb } from "lucide-react";
+import { Eye, Edit, Sparkles, FileText, Wrench, LayoutTemplate, Book, Lightbulb, X, ChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
+
+// Move getTypeIcon function outside components to make it accessible to all components
+const getTypeIcon = (type: string) => {
+  switch (type) {
+    case 'Explicativo':
+      return <Book className="h-4 w-4" />;
+    case 'Editável':
+      return <Edit className="h-4 w-4" />;
+    case 'Template':
+      return <LayoutTemplate className="h-4 w-4" />;
+    case 'Ferramenta':
+      return <Wrench className="h-4 w-4" />;
+    case 'Estratégia pronta':
+      return <Lightbulb className="h-4 w-4" />;
+    default:
+      return <FileText className="h-4 w-4" />;
+  }
+};
 
 interface LibraryContentProps {
   items: LibraryItem[];
   onRequestAI: (item: LibraryItem) => void;
+  onCloseRecommendation?: () => void;
+  toggleSidebar?: () => void;
 }
 
-export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
-  // Moved getTypeIcon function outside of components to make it accessible to all components
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'Explicativo':
-        return <Book className="h-4 w-4" />;
-      case 'Editável':
-        return <Edit className="h-4 w-4" />;
-      case 'Template':
-        return <LayoutTemplate className="h-4 w-4" />;
-      case 'Ferramenta':
-        return <Wrench className="h-4 w-4" />;
-      case 'Estratégia pronta':
-        return <Lightbulb className="h-4 w-4" />;
-      default:
-        return <FileText className="h-4 w-4" />;
-    }
-  };
-
+export const LibraryContent = ({ 
+  items, 
+  onRequestAI, 
+  onCloseRecommendation,
+  toggleSidebar 
+}: LibraryContentProps) => {
+  const navigate = useNavigate();
+  
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold text-white">
           {items.length} {items.length === 1 ? 'resultado' : 'resultados'} encontrados
         </h2>
+        
+        <div className="flex gap-2">
+          {toggleSidebar && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="bg-gray-800 border-gray-700 text-gray-400"
+              onClick={toggleSidebar}
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Filtros
+            </Button>
+          )}
+          
+          {onCloseRecommendation && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="bg-gray-800 border-gray-700 text-gray-400"
+              onClick={onCloseRecommendation}
+            >
+              <X className="h-4 w-4 mr-1" />
+              Fechar recomendação
+            </Button>
+          )}
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="bg-gray-800 border-gray-700 text-gray-400"
+            onClick={() => navigate('/dashboard')}
+          >
+            Dashboard
+          </Button>
+        </div>
       </div>
 
       {items.length === 0 ? (
