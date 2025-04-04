@@ -33,6 +33,15 @@ const CallToAction = () => {
               Você pode sair depois. Mas vai se perguntar por que perdeu tanto tempo fazendo tudo sozinho.
             </p>
           </div>
+          
+          <div className="mt-6">
+            <Link 
+              to="/library" 
+              className="text-atlas-highlight hover:text-atlas-highlight/80 transition-colors underline font-medium"
+            >
+              Explore nossa biblioteca estratégica
+            </Link>
+          </div>
         </div>
       </div>
     </section>
