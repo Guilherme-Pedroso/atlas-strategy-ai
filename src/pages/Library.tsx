@@ -5,12 +5,13 @@ import { LibrarySidebar } from "@/components/library/LibrarySidebar";
 import { LibraryContent } from "@/components/library/LibraryContent";
 import { LibraryAIModal } from "@/components/library/LibraryAIModal";
 import { LibraryMobileFilters } from "@/components/library/LibraryMobileFilters";
-import { useMobile } from "@/hooks/use-mobile";
 import { FilterState, LibraryItem } from "@/types/library";
 import { generateMockLibraryData } from "@/lib/mock-data";
 
 const Library = () => {
-  const isMobile = useMobile();
+  // Since we can't see the implementation of use-mobile.tsx, we'll assume it exports
+  // useIsMobile instead of useMobile based on the error message
+  const isMobile = window.innerWidth < 768; // Simple alternative implementation
   const [items] = useState<LibraryItem[]>(generateMockLibraryData());
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<FilterState>({

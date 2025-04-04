@@ -3,7 +3,7 @@ import React from "react";
 import { LibraryItem } from "@/types/library";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Eye, Edit, Sparkles, FileText, Tool, LayoutTemplate, Book, Lightbulb } from "lucide-react";
+import { Eye, Edit, Sparkles, FileText, Wrench, LayoutTemplate, Book, Lightbulb } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface LibraryContentProps {
@@ -21,7 +21,7 @@ export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
       case 'Template':
         return <LayoutTemplate className="h-4 w-4" />;
       case 'Ferramenta':
-        return <Tool className="h-4 w-4" />;
+        return <Wrench className="h-4 w-4" />;
       case 'Estratégia pronta':
         return <Lightbulb className="h-4 w-4" />;
       default:
