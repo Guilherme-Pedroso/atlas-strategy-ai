@@ -17,7 +17,7 @@ const CallToAction = () => {
           </p>
           
           <div className="mt-10">
-            <Button className="btn-cta text-lg px-8 py-6 rounded-lg" size="lg">
+            <Button className="btn-cta text-lg px-8 py-6 rounded-lg w-full sm:w-auto transform transition-transform duration-300 hover:scale-105" size="lg">
               Comece agora — a partir de R$ 99/mês
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

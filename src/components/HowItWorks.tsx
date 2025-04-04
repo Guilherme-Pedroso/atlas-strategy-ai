@@ -1,6 +1,6 @@
 
 import React from "react";
-import { MessageSquare, Clipboard, Zap } from "lucide-react";
+import { MessageSquare, Clipboard, FileSpreadsheet } from "lucide-react";
 
 const HowItWorks = () => {
   const steps = [
@@ -18,9 +18,9 @@ const HowItWorks = () => {
     },
     {
       number: 3,
-      icon: <Zap className="h-12 w-12 text-atlas-highlight" />,
-      title: "Execute com a ajuda da sua IA",
-      description: "Ela te acompanha, dá ideias, responde dúvidas e te guia no caminho mais curto até o resultado."
+      icon: <FileSpreadsheet className="h-12 w-12 text-atlas-highlight" />,
+      title: "Construa sua estratégia com ferramentas adaptadas ao seu negócio",
+      description: "Receba sugestões, edite online, valide com IA. Tudo salvo no seu painel. Nada pra baixar, nada genérico."
     }
   ];
 
@@ -33,10 +33,10 @@ const HowItWorks = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
           {steps.map((step) => (
-            <div key={step.number} className="feature-card relative flex flex-col items-center text-center group">
-              <div className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-atlas-background text-white flex items-center justify-center font-bold text-lg">
+            <div key={step.number} className="feature-card relative flex flex-col items-center text-center group p-8">
+              <div className="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-atlas-background text-white flex items-center justify-center font-bold text-lg shadow-md">
                 {step.number}
               </div>
               

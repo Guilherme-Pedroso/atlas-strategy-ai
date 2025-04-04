@@ -1,6 +1,14 @@
 
 import React from "react";
 import { Check, X } from "lucide-react";
+import { 
+  Table, 
+  TableHeader, 
+  TableBody, 
+  TableHead, 
+  TableRow, 
+  TableCell 
+} from "@/components/ui/table";
 
 const ComparisonTable = () => {
   const comparisons = [
@@ -57,44 +65,56 @@ const ComparisonTable = () => {
           </h2>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="bg-atlas-background text-white">
-                <th className="p-4 text-left rounded-tl-lg">Aspectos</th>
-                <th className="p-4 text-left">Consultoria Tradicional</th>
-                <th className="p-4 text-left rounded-tr-lg">Marketing Atlas</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="overflow-x-auto rounded-lg shadow-lg">
+          <Table className="w-full border-collapse">
+            <TableHeader>
+              <TableRow className="bg-atlas-background text-white">
+                <TableHead className="p-4 text-left font-bold text-white">Aspectos</TableHead>
+                <TableHead className="p-4 text-left font-bold text-white">Consultoria Tradicional</TableHead>
+                <TableHead className="p-4 text-left font-bold text-white">Marketing Atlas</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {comparisons.map((item, index) => (
-                <tr 
+                <TableRow 
                   key={index} 
                   className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} 
-                  ${item.highlight ? 'text-atlas-background font-medium' : 'text-gray-700'}`}
+                  ${item.highlight ? 'font-medium' : ''} hover:bg-gray-100 transition-colors`}
                 >
-                  <td className="p-4 border-b border-gray-200">{item.aspect}</td>
-                  <td className="p-4 border-b border-gray-200">
+                  <TableCell className="p-4 border-b border-gray-200">
+                    <span className={item.highlight ? "text-atlas-background font-semibold" : "text-gray-700"}>
+                      {item.aspect}
+                    </span>
+                  </TableCell>
+                  <TableCell className="p-4 border-b border-gray-200">
                     <div className="flex items-center">
-                      {item.highlight && <X className="text-atlas-cta mr-2 h-5 w-5" />}
-                      {item.traditional}
+                      {item.highlight && <X className="text-atlas-cta mr-2 h-5 w-5 shrink-0" />}
+                      <span className={item.highlight ? "text-atlas-cta" : "text-gray-700"}>
+                        {item.traditional}
+                      </span>
                     </div>
-                  </td>
-                  <td className="p-4 border-b border-gray-200">
+                  </TableCell>
+                  <TableCell className="p-4 border-b border-gray-200">
                     <div className="flex items-center">
-                      {item.highlight && <Check className="text-atlas-highlight mr-2 h-5 w-5" />}
-                      {item.atlas}
+                      {item.highlight && (
+                        <div className="bg-atlas-highlight/10 p-1 rounded-full mr-2">
+                          <Check className="text-atlas-highlight h-5 w-5 shrink-0" />
+                        </div>
+                      )}
+                      <span className={item.highlight ? "text-atlas-highlight font-semibold" : "text-gray-700"}>
+                        {item.atlas}
+                      </span>
                     </div>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
         
-        <div className="text-center mt-10">
-          <p className="text-xl font-medium text-atlas-background">
-            Pelo preço de um almoço, você tem o que antes custava o salário de um time inteiro.
+        <div className="text-center mt-10 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl font-medium text-atlas-background">
+            Pelo preço de um almoço, você tem o que antes custava o <span className="text-atlas-cta">salário de um time inteiro</span>.
           </p>
         </div>
       </div>
