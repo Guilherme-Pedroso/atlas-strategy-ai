@@ -12,6 +12,7 @@ interface LibraryContentProps {
 }
 
 export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
+  // Moved getTypeIcon function outside of components to make it accessible to all components
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'Explicativo':
@@ -52,6 +53,7 @@ export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
               key={item.id}
               item={item}
               onRequestAI={() => onRequestAI(item)}
+              getTypeIcon={getTypeIcon}
             />
           ))}
         </div>
@@ -63,9 +65,10 @@ export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
 interface LibraryCardProps {
   item: LibraryItem;
   onRequestAI: () => void;
+  getTypeIcon: (type: string) => JSX.Element;
 }
 
-const LibraryCard = ({ item, onRequestAI }: LibraryCardProps) => {
+const LibraryCard = ({ item, onRequestAI, getTypeIcon }: LibraryCardProps) => {
   const typeIcon = getTypeIcon(item.type);
   
   return (
