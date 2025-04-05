@@ -40,14 +40,85 @@ export const SmartDocumentsContent = () => {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar
           </Button>
-          <Button onClick={handleSaveDocument} className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90">
-            Salvar documento
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={handleCloseDocument} 
+              className="text-atlas-neutral hover:text-white"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+            <Button onClick={handleSaveDocument} className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90">
+              Salvar documento
+            </Button>
+          </div>
         </div>
 
-        {activeDocument === "branding" && <BrandingDocument />}
-        {activeDocument === "pitch" && <PitchDocument />}
-        {activeDocument === "contentPlan" && <ContentPlanDocument />}
+        <div className="flex">
+          {!filtersMinimized && (
+            <div className="w-64 pr-6 border-r border-white/10">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-medium text-white">Filtros</h3>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => setFiltersMinimized(true)}
+                  className="h-8 w-8 text-atlas-neutral hover:text-white"
+                >
+                  <MinusCircle className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm text-atlas-neutral block mb-2">Categoria</label>
+                  <select className="w-full bg-atlas-background/50 border border-white/10 rounded-md p-2 text-white">
+                    <option>Todos</option>
+                    <option>Branding</option>
+                    <option>Estratégia</option>
+                    <option>Conteúdo</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm text-atlas-neutral block mb-2">Dificuldade</label>
+                  <select className="w-full bg-atlas-background/50 border border-white/10 rounded-md p-2 text-white">
+                    <option>Todos</option>
+                    <option>Iniciante</option>
+                    <option>Intermediário</option>
+                    <option>Avançado</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm text-atlas-neutral block mb-2">Tempo</label>
+                  <select className="w-full bg-atlas-background/50 border border-white/10 rounded-md p-2 text-white">
+                    <option>Todos</option>
+                    <option>< 30 min</option>
+                    <option>30-60 min</option>
+                    <option>> 60 min</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <div className={`${filtersMinimized ? 'w-full' : 'flex-1 pl-6'}`}>
+            {filtersMinimized && (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => setFiltersMinimized(false)}
+                className="mb-4 bg-atlas-background/50 border-white/10 text-atlas-neutral hover:text-white"
+              >
+                <PlusCircle className="h-4 w-4 mr-2" />
+                Mostrar filtros
+              </Button>
+            )}
+            
+            {activeDocument === "branding" && <BrandingDocument />}
+            {activeDocument === "pitch" && <PitchDocument />}
+            {activeDocument === "contentPlan" && <ContentPlanDocument />}
+          </div>
+        </div>
       </div>
     );
   };
