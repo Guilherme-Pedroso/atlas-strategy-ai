@@ -7,22 +7,16 @@ import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
 
 interface AIMessageProps {
-  message: {
-    id: string;
-    content: string;
-    role: "user" | "assistant";
-    timestamp: Date;
-  };
-  onCopy: (text: string) => void;
-  onInsertIntoDocument: () => void;
-  onEditManually: () => void;
+  content: string;
+  isUser: boolean;
+  timestamp: Date;
 }
 
-export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManually }: AIMessageProps) => {
+export const AIMessage = ({ content, isUser, timestamp }: AIMessageProps) => {
   const [copied, setCopied] = useState(false);
   
   const handleCopy = () => {
-    onCopy(message.content);
+    navigator.clipboard.writeText(content);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -30,26 +24,24 @@ export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManuall
   const formattedTime = new Intl.DateTimeFormat('pt-BR', {
     hour: '2-digit',
     minute: '2-digit'
-  }).format(message.timestamp);
-  
-  const isAssistant = message.role === "assistant";
+  }).format(timestamp);
   
   return (
     <div className={cn(
       "flex gap-4 max-w-4xl",
-      isAssistant ? "text-white" : "text-atlas-neutral"
+      isUser ? "text-atlas-neutral" : "text-white"
     )}>
       <div className="flex-shrink-0 mt-1">
         <Avatar className={cn(
           "h-8 w-8 border",
-          isAssistant 
-            ? "bg-atlas-highlight/20 border-atlas-highlight/50" 
-            : "bg-atlas-neutral/20 border-atlas-neutral/50"
+          isUser 
+            ? "bg-atlas-neutral/20 border-atlas-neutral/50" 
+            : "bg-atlas-highlight/20 border-atlas-highlight/50"
         )}>
-          {isAssistant ? (
-            <MessageSquare className="h-4 w-4 text-atlas-highlight" />
-          ) : (
+          {isUser ? (
             <User className="h-4 w-4 text-atlas-neutral" />
+          ) : (
+            <MessageSquare className="h-4 w-4 text-atlas-highlight" />
           )}
         </Avatar>
       </div>
@@ -57,7 +49,7 @@ export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManuall
       <div className="flex-1 space-y-2">
         <div className="flex items-center gap-2">
           <span className="font-medium">
-            {isAssistant ? "Atlas AI" : "Você"}
+            {isUser ? "Você" : "Atlas AI"}
           </span>
           <span className="text-xs text-atlas-neutral/70">
             {formattedTime}
@@ -74,11 +66,11 @@ export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManuall
           "prose-a:text-atlas-highlight prose-a:no-underline hover:prose-a:underline"
         )}>
           <ReactMarkdown>
-            {message.content}
+            {content}
           </ReactMarkdown>
         </div>
         
-        {isAssistant && (
+        {!isUser && (
           <div className="flex flex-wrap gap-2 mt-4">
             <Button
               variant="outline"
@@ -103,7 +95,7 @@ export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManuall
               variant="outline"
               size="sm"
               className="h-8 gap-1.5 text-xs bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
-              onClick={onInsertIntoDocument}
+              onClick={() => console.log("Insert into document")}
             >
               <ExternalLink className="h-3.5 w-3.5" />
               Inserir em documento
@@ -113,7 +105,7 @@ export const AIMessage = ({ message, onCopy, onInsertIntoDocument, onEditManuall
               variant="outline"
               size="sm"
               className="h-8 gap-1.5 text-xs bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
-              onClick={onEditManually}
+              onClick={() => console.log("Edit manually")}
             >
               <Edit className="h-3.5 w-3.5" />
               Editar manualmente

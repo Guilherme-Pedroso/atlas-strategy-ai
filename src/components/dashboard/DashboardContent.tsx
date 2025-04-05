@@ -27,6 +27,13 @@ export const DashboardContent = () => {
     return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
   };
   
+  // Helper function to determine progress bar color
+  const getProgressColor = (percentage: number) => {
+    if (percentage < 50) return "bg-green-500";
+    if (percentage < 80) return "bg-amber-500";
+    return "bg-red-500";
+  };
+  
   return (
     <div className="p-6">
       <div className="max-w-7xl mx-auto">
@@ -104,14 +111,7 @@ export const DashboardContent = () => {
                 </div>
                 <Progress
                   value={aiUsagePercentage}
-                  className="h-2 bg-atlas-background"
-                  indicatorClassName={
-                    aiUsagePercentage < 50 
-                      ? "bg-green-500" 
-                      : aiUsagePercentage < 80 
-                      ? "bg-amber-500" 
-                      : "bg-red-500"
-                  }
+                  className={`h-2 bg-atlas-background ${getProgressColor(aiUsagePercentage)}`}
                 />
               </div>
               
