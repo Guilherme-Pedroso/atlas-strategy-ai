@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { BrandingDocument } from "@/components/documents/templates/BrandingDocument";
 import { PitchDocument } from "@/components/documents/templates/PitchDocument";
 import { ContentPlanDocument } from "@/components/documents/templates/ContentPlanDocument";
+import { SWOTDocument } from "@/components/documents/templates/SWOTDocument";
+import { ROICalculatorDocument } from "@/components/documents/templates/ROICalculatorDocument";
+import { EmailTemplateDocument } from "@/components/documents/templates/EmailTemplateDocument";
 import { X, MinusCircle, PlusCircle, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -117,6 +120,9 @@ export const SmartDocumentsContent = () => {
             {activeDocument === "branding" && <BrandingDocument />}
             {activeDocument === "pitch" && <PitchDocument />}
             {activeDocument === "contentPlan" && <ContentPlanDocument />}
+            {activeDocument === "swot" && <SWOTDocument />}
+            {activeDocument === "roi" && <ROICalculatorDocument />}
+            {activeDocument === "email" && <EmailTemplateDocument />}
           </div>
         </div>
       </div>
@@ -142,6 +148,24 @@ export const SmartDocumentsContent = () => {
         title: "Plano de Conteúdo para Redes Sociais",
         description: "Organize sua estratégia de conteúdo para cada etapa do funil de vendas.",
         icon: "📱"
+      },
+      {
+        id: "swot",
+        title: "Matriz SWOT Interativa",
+        description: "Análise estratégica de Forças, Fraquezas, Oportunidades e Ameaças do seu negócio.",
+        icon: "📊"
+      },
+      {
+        id: "roi",
+        title: "Calculadora de ROI em Marketing",
+        description: "Calcule o retorno sobre investimento das suas campanhas de marketing.",
+        icon: "💰"
+      },
+      {
+        id: "email",
+        title: "Template de E-mail Marketing",
+        description: "Crie e-mails profissionais com layouts otimizados para diferentes objetivos.",
+        icon: "✉️"
       }
     ];
 
