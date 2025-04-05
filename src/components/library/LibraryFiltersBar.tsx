@@ -7,7 +7,7 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
-import { FilterState } from "@/types/library";
+import { FilterState, ContentType, BusinessStage, ThematicArea } from "@/types/library";
 import { ChevronDown } from "lucide-react";
 
 interface LibraryFiltersBarProps {
@@ -17,39 +17,40 @@ interface LibraryFiltersBarProps {
 
 export const LibraryFiltersBar = ({ filters, setFilters }: LibraryFiltersBarProps) => {
   const contentTypes = [
-    { label: "Templates", value: "template" },
-    { label: "Calculadoras", value: "calculator" },
-    { label: "Guias", value: "guide" },
-    { label: "Checklists", value: "checklist" }
+    { label: "Templates", value: "Template" as ContentType },
+    { label: "Explicativos", value: "Explicativo" as ContentType },
+    { label: "Editáveis", value: "Editável" as ContentType },
+    { label: "Ferramentas", value: "Ferramenta" as ContentType }
   ];
   
   const businessStages = [
-    { label: "Iniciante", value: "beginner" },
-    { label: "Em crescimento", value: "growth" },
-    { label: "Estabelecido", value: "established" },
-    { label: "Expansão", value: "expansion" }
+    { label: "Validação", value: "Validação" as BusinessStage },
+    { label: "Crescimento", value: "Crescimento" as BusinessStage },
+    { label: "Escala", value: "Escala" as BusinessStage },
+    { label: "Branding", value: "Branding" as BusinessStage }
   ];
   
   const thematicAreas = [
-    { label: "Marketing Digital", value: "digital-marketing" },
-    { label: "Redes Sociais", value: "social-media" },
-    { label: "E-commerce", value: "ecommerce" },
-    { label: "Branding", value: "branding" },
-    { label: "Vendas", value: "sales" },
-    { label: "Conteúdo", value: "content" }
+    { label: "Marketing", value: "Marketing" as ThematicArea },
+    { label: "Vendas", value: "Vendas" as ThematicArea },
+    { label: "Finanças", value: "Finanças" as ThematicArea },
+    { label: "Branding", value: "Branding" as ThematicArea },
+    { label: "Estratégia", value: "Estratégia" as ThematicArea },
+    { label: "Conteúdo", value: "Conteúdo" as ThematicArea }
   ];
   
-  const toggleFilter = (filterType: keyof FilterState, value: string) => {
+  const toggleFilter = (filterType: keyof FilterState, value: ContentType | BusinessStage | ThematicArea) => {
     setFilters(prev => {
-      if (prev[filterType].includes(value)) {
+      const currentArray = prev[filterType] as any[];
+      if (currentArray.includes(value)) {
         return {
           ...prev,
-          [filterType]: prev[filterType].filter(item => item !== value)
+          [filterType]: currentArray.filter(item => item !== value)
         };
       } else {
         return {
           ...prev,
-          [filterType]: [...prev[filterType], value]
+          [filterType]: [...currentArray, value]
         };
       }
     });

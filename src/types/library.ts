@@ -12,6 +12,11 @@ export interface LibraryItem {
   stages: BusinessStage[];
   isEditable: boolean;
   thumbnail?: string;
+  // Adding missing properties from errors
+  imageUrl?: string;
+  isPremium?: boolean;
+  estimatedTime?: string;
+  downloadUrl?: string;
 }
 
 export interface FilterState {
