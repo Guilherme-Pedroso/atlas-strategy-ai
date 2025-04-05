@@ -92,9 +92,9 @@ export const SmartDocumentsContent = () => {
                   <label className="text-sm text-atlas-neutral block mb-2">Tempo</label>
                   <select className="w-full bg-atlas-background/50 border border-white/10 rounded-md p-2 text-white">
                     <option>Todos</option>
-                    <option>< 30 min</option>
+                    <option>{"< 30 min"}</option>
                     <option>30-60 min</option>
-                    <option>> 60 min</option>
+                    <option>{">"} 60 min</option>
                   </select>
                 </div>
               </div>
