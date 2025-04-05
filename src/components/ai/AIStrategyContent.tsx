@@ -5,8 +5,19 @@ import { AIPromptSuggestion } from "@/components/ai/AIPromptSuggestion";
 import { AISidebar } from "@/components/ai/AISidebar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, Send, Paperclip, X, FileText, Image as ImageIcon, Clock } from "lucide-react";
+import { 
+  Sparkles, 
+  Send, 
+  Paperclip, 
+  X, 
+  FileText, 
+  Image as ImageIcon, 
+  Clock, 
+  ChevronRight,
+  History 
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 type Message = {
   id: string;
@@ -40,6 +51,7 @@ export const AIStrategyContent = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   
   const { toast } = useToast();
   
@@ -203,6 +215,17 @@ export const AIStrategyContent = () => {
                   />
                 ))}
               </div>
+              
+              {/* Histórico de conversas button */}
+              <Button
+                variant="outline"
+                className="mt-4 bg-transparent border-white/10 text-atlas-neutral hover:bg-white/5 hover:text-white"
+                onClick={() => navigate("/ai-history")}
+              >
+                <History className="h-4 w-4 mr-2" />
+                Histórico de conversas
+                <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
             </div>
             
             {/* Messages */}

@@ -1,170 +1,141 @@
 
 import React from "react";
-import { LibraryItem } from "@/types/library";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Eye, Edit, Sparkles, FileText, Wrench, LayoutTemplate, Book, Lightbulb, X, ChevronLeft } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useNavigate } from "react-router-dom";
-
-// Move getTypeIcon function outside components to make it accessible to all components
-const getTypeIcon = (type: string) => {
-  switch (type) {
-    case 'Explicativo':
-      return <Book className="h-4 w-4" />;
-    case 'Editável':
-      return <Edit className="h-4 w-4" />;
-    case 'Template':
-      return <LayoutTemplate className="h-4 w-4" />;
-    case 'Ferramenta':
-      return <Wrench className="h-4 w-4" />;
-    case 'Estratégia pronta':
-      return <Lightbulb className="h-4 w-4" />;
-    default:
-      return <FileText className="h-4 w-4" />;
-  }
-};
+import { Button } from "@/components/ui/button";
+import { LibraryItem } from "@/types/library";
+import { Download, MessageSquare, Clock } from "lucide-react";
 
 interface LibraryContentProps {
   items: LibraryItem[];
   onRequestAI: (item: LibraryItem) => void;
-  onCloseRecommendation?: () => void;
-  toggleSidebar?: () => void;
 }
 
-export const LibraryContent = ({ 
-  items, 
-  onRequestAI, 
-  onCloseRecommendation,
-  toggleSidebar 
-}: LibraryContentProps) => {
-  const navigate = useNavigate();
-  
+export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
+  // Helper function to get badge color based on content type
+  const getBadgeColor = (type: string) => {
+    switch (type) {
+      case "template":
+        return "bg-blue-600 hover:bg-blue-700";
+      case "calculator":
+        return "bg-green-600 hover:bg-green-700";
+      case "guide":
+        return "bg-purple-600 hover:bg-purple-700";
+      case "checklist":
+        return "bg-orange-600 hover:bg-orange-700";
+      default:
+        return "bg-slate-600 hover:bg-slate-700";
+    }
+  };
+
+  // Helper function to get icon based on content type
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case "template":
+        return "Template";
+      case "calculator":
+        return "Calculadora";
+      case "guide":
+        return "Guia";
+      case "checklist":
+        return "Checklist";
+      default:
+        return type;
+    }
+  };
+
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-white">
-          {items.length} {items.length === 1 ? 'resultado' : 'resultados'} encontrados
-        </h2>
-        
-        <div className="flex gap-2">
-          {toggleSidebar && (
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="bg-gray-800 border-gray-700 text-gray-400"
-              onClick={toggleSidebar}
-            >
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Filtros
-            </Button>
-          )}
-          
-          {onCloseRecommendation && (
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="bg-gray-800 border-gray-700 text-gray-400"
-              onClick={onCloseRecommendation}
-            >
-              <X className="h-4 w-4 mr-1" />
-              Fechar recomendação
-            </Button>
-          )}
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="bg-gray-800 border-gray-700 text-gray-400"
-            onClick={() => navigate('/dashboard')}
-          >
-            Dashboard
-          </Button>
-        </div>
-      </div>
-
-      {items.length === 0 ? (
-        <div className="text-center py-12">
-          <FileText className="h-12 w-12 mx-auto text-gray-500 mb-4" />
-          <h3 className="text-lg font-medium text-white mb-2">Nenhum material encontrado</h3>
-          <p className="text-gray-400">
-            Tente ajustar seus filtros ou termos de busca para encontrar o que precisa.
-          </p>
-        </div>
-      ) : (
+      {items.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (
-            <LibraryCard 
-              key={item.id}
-              item={item}
-              onRequestAI={() => onRequestAI(item)}
-              getTypeIcon={getTypeIcon}
-            />
+            <Card key={item.id} className="overflow-hidden border-white/10 bg-atlas-background/50 transition-all hover:bg-atlas-background">
+              <div className="relative">
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="h-40 w-full object-cover"
+                />
+                <Badge
+                  className={`absolute top-3 left-3 ${getBadgeColor(item.type)}`}
+                >
+                  {getTypeLabel(item.type)}
+                </Badge>
+                {item.isPremium && (
+                  <Badge
+                    className="absolute top-3 right-3 bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90"
+                  >
+                    Premium
+                  </Badge>
+                )}
+              </div>
+              <CardContent className="p-4">
+                <h3 className="mb-2 text-lg font-bold text-white line-clamp-1">
+                  {item.title}
+                </h3>
+                <p className="mb-4 text-sm text-atlas-neutral line-clamp-2">
+                  {item.description}
+                </p>
+                <div className="mb-4 flex flex-wrap gap-2">
+                  {item.tags.slice(0, 3).map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="outline"
+                      className="bg-white/5 text-atlas-neutral border-white/10"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                  {item.tags.length > 3 && (
+                    <Badge
+                      variant="outline"
+                      className="bg-white/5 text-atlas-neutral border-white/10"
+                    >
+                      +{item.tags.length - 3}
+                    </Badge>
+                  )}
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center text-xs text-atlas-neutral">
+                    <Clock className="mr-1 h-3.5 w-3.5" />
+                    {item.estimatedTime}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      className="h-8 gap-1 bg-white/10 text-white hover:bg-white/20"
+                      onClick={() => window.open(item.downloadUrl, "_blank")}
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      <span className="hidden sm:inline">Baixar</span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="h-8 gap-1 bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90"
+                      onClick={() => onRequestAI(item)}
+                    >
+                      <MessageSquare className="h-3.5 w-3.5" />
+                      <span className="hidden sm:inline">Pedir à IA</span>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center py-16">
+          <div className="mb-4 rounded-full bg-white/5 p-4">
+            <MessageSquare className="h-10 w-10 text-atlas-neutral" />
+          </div>
+          <h3 className="mb-2 text-xl font-bold text-white">
+            Nenhum item encontrado
+          </h3>
+          <p className="mb-6 text-center text-atlas-neutral">
+            Tente ajustar os filtros ou fazer uma nova busca.
+          </p>
         </div>
       )}
     </div>
-  );
-};
-
-interface LibraryCardProps {
-  item: LibraryItem;
-  onRequestAI: () => void;
-  getTypeIcon: (type: string) => JSX.Element;
-}
-
-const LibraryCard = ({ item, onRequestAI, getTypeIcon }: LibraryCardProps) => {
-  const typeIcon = getTypeIcon(item.type);
-  
-  return (
-    <Card className="bg-[#1A1F2E] border-gray-800 text-white overflow-hidden hover:shadow-lg hover:shadow-atlas-highlight/5 transition-all duration-300">
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-start">
-          <Badge variant="outline" className="bg-gray-800/70 text-gray-300 flex items-center gap-1">
-            {typeIcon}
-            {item.type}
-          </Badge>
-        </div>
-        <CardTitle className="mt-2 text-xl">{item.title}</CardTitle>
-        <CardDescription className="text-gray-400">
-          {item.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="pb-2">
-        <div className="flex flex-wrap gap-1 mt-1">
-          {item.tags.slice(0, 3).map(tag => (
-            <Badge key={tag} variant="secondary" className="bg-atlas-secondary/20 text-atlas-secondary border-atlas-secondary/30">
-              {tag}
-            </Badge>
-          ))}
-          {item.tags.length > 3 && (
-            <Badge variant="secondary" className="bg-gray-800 text-gray-400">
-              +{item.tags.length - 3}
-            </Badge>
-          )}
-        </div>
-      </CardContent>
-      <CardFooter className="flex gap-2 pt-4">
-        <Button variant="outline" size="sm" className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700">
-          <Eye className="h-4 w-4 mr-1" />
-          Visualizar
-        </Button>
-        {item.isEditable && (
-          <Button variant="outline" size="sm" className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700">
-            <Edit className="h-4 w-4 mr-1" />
-            Editar
-          </Button>
-        )}
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="ml-auto bg-atlas-secondary/10 border-atlas-secondary/30 text-atlas-secondary hover:bg-atlas-secondary/20"
-          onClick={onRequestAI}
-        >
-          <Sparkles className="h-4 w-4 mr-1" />
-          IA
-        </Button>
-      </CardFooter>
-    </Card>
   );
 };

@@ -5,8 +5,10 @@ import { LibrarySidebar } from "@/components/library/LibrarySidebar";
 import { LibraryContent } from "@/components/library/LibraryContent";
 import { LibraryAIModal } from "@/components/library/LibraryAIModal";
 import { LibraryMobileFilters } from "@/components/library/LibraryMobileFilters";
+import { LibraryFiltersBar } from "@/components/library/LibraryFiltersBar";
 import { FilterState, LibraryItem } from "@/types/library";
 import { generateMockLibraryData } from "@/lib/mock-data";
+import { AppShell } from "@/components/dashboard/AppShell";
 
 const Library = () => {
   // Since we can't see the implementation of use-mobile.tsx, we'll assume it exports
@@ -53,43 +55,43 @@ const Library = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-atlas-background text-white">
-      <LibraryHeader 
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      
-      <div className="flex flex-1 overflow-hidden">
-        {!isMobile && (
-          <LibrarySidebar 
-            filters={filters} 
-            setFilters={setFilters} 
+    <AppShell>
+      <div className="flex flex-col min-h-screen bg-atlas-background text-white">
+        <LibraryHeader 
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        
+        <div className="flex flex-1 overflow-hidden">
+          <div className="flex-1 overflow-auto p-4 md:p-6">
+            {isMobile ? (
+              <LibraryMobileFilters 
+                filters={filters} 
+                setFilters={setFilters} 
+              />
+            ) : (
+              <LibraryFiltersBar
+                filters={filters}
+                setFilters={setFilters}
+              />
+            )}
+            
+            <LibraryContent 
+              items={filteredItems} 
+              onRequestAI={handleOpenAIModal} 
+            />
+          </div>
+        </div>
+        
+        {showAIModal && selectedItem && (
+          <LibraryAIModal 
+            item={selectedItem}
+            isOpen={showAIModal}
+            onClose={() => setShowAIModal(false)}
           />
         )}
-        
-        <div className="flex-1 overflow-auto p-4 md:p-6">
-          {isMobile && (
-            <LibraryMobileFilters 
-              filters={filters} 
-              setFilters={setFilters} 
-            />
-          )}
-          
-          <LibraryContent 
-            items={filteredItems} 
-            onRequestAI={handleOpenAIModal} 
-          />
-        </div>
       </div>
-      
-      {showAIModal && selectedItem && (
-        <LibraryAIModal 
-          item={selectedItem}
-          isOpen={showAIModal}
-          onClose={() => setShowAIModal(false)}
-        />
-      )}
-    </div>
+    </AppShell>
   );
 };
 

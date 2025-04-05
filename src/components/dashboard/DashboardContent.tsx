@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Clock
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardContent = () => {
   const [aiTokensUsed, setAiTokensUsed] = useState(640);
@@ -22,6 +23,7 @@ export const DashboardContent = () => {
   const aiUsagePercentage = (aiTokensUsed / totalAiTokens) * 100;
   const resetDate = new Date();
   resetDate.setDate(resetDate.getDate() + 15); // Reset in 15 days
+  const navigate = useNavigate();
   
   const formatResetDate = (date: Date) => {
     return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -96,7 +98,10 @@ export const DashboardContent = () => {
                   <HelpCircle className="h-4 w-4" />
                 </Button>
               </div>
-              <Button className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90">
+              <Button 
+                className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90"
+                onClick={() => navigate("/plans")}
+              >
                 <PlusCircle className="h-4 w-4 mr-2" />
                 Aumentar limite
               </Button>
