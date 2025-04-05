@@ -36,18 +36,7 @@ export const LibraryHeader = ({ searchQuery, setSearchQuery }: LibraryHeaderProp
           </div>
         </div>
 
-        <div className="mt-4 p-4 rounded-lg bg-atlas-secondary/20 border border-atlas-secondary/30">
-          <h2 className="text-base font-medium text-white">
-            Com base nas suas respostas, recomendamos começar com:
-          </h2>
-          <div className="mt-2 flex flex-wrap gap-2">
-            <RecommendationPill text="Matriz SWOT adaptada" />
-            <RecommendationPill text="Cronograma de conteúdo para Instagram" />
-            <RecommendationPill text="Pitch Deck editável" />
-            <RecommendationPill text="Canvas de proposta de valor" />
-            <RecommendationPill text="Calculadora de ROI" />
-          </div>
-        </div>
+        
       </div>
     </header>
   );

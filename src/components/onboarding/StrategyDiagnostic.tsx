@@ -180,7 +180,7 @@ const StrategyDiagnostic: React.FC<StrategyDiagnosticProps> = ({ data, updateDat
         </div>
 
         <div className="space-y-3">
-          <Label>Qual é o seu orçamento atual para marketing?</Label>
+          <Label>Você sabe qual é o seu orçamento atual para marketing?</Label>
           <RadioGroup 
             value={data.hasBudget} 
             onValueChange={(value) => updateData({ hasBudget: value })}
@@ -211,7 +211,7 @@ const StrategyDiagnostic: React.FC<StrategyDiagnosticProps> = ({ data, updateDat
               <SelectValue placeholder="Selecione uma região" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="brasil">Brasil inteiro</SelectItem>
+              <SelectItem value="brasil">Brasil</SelectItem>
               <SelectItem value="sp">São Paulo</SelectItem>
               <SelectItem value="rj">Rio de Janeiro</SelectItem>
               <SelectItem value="mg">Minas Gerais</SelectItem>
@@ -219,6 +219,7 @@ const StrategyDiagnostic: React.FC<StrategyDiagnosticProps> = ({ data, updateDat
               <SelectItem value="sul">Sul</SelectItem>
               <SelectItem value="centro-oeste">Centro-Oeste</SelectItem>
               <SelectItem value="norte">Norte</SelectItem>
+              <SelectItem value="norte">Sudeste</SelectItem>
               <SelectItem value="internacional">Internacional</SelectItem>
             </SelectContent>
           </Select>

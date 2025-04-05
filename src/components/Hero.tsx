@@ -39,7 +39,7 @@ const Hero = () => {
             </p>
             
             <p className="text-sm md:text-base mt-4 text-atlas-highlight font-medium max-w-2xl">
-              Inclui acesso completo à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares para entregar.
+              Inclui acesso completo à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares de reais para entregar.
             </p>
           </div>
         </div>
