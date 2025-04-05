@@ -15,6 +15,8 @@ import Plans from "./pages/Plans";
 import AIHistory from "./pages/AIHistory";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
+import Tools from "./pages/Tools";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/ai" element={<AIStrategy />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/ai-history" element={<AIHistory />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/index" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
