@@ -8,7 +8,11 @@ import {
   Plus,
   Search,
   Trash2,
-  MoreVertical
+  MoreVertical,
+  BarChart,
+  PenTool,
+  Layers,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
