@@ -23,11 +23,14 @@ import {
   Bell,
   Settings,
   HelpCircle,
-  Search
+  Search,
+  Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -37,6 +40,7 @@ export const AppShell = ({ children }: AppShellProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const menuItems = [
     {
@@ -178,8 +182,10 @@ export const AppShell = ({ children }: AppShellProps) => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 pt-16 md:pt-0 md:pl-[var(--sidebar-width)]">
-          {children}
+        <div className="flex-1 pt-16 md:pt-0 w-full overflow-x-hidden">
+          <div className="w-full max-w-full overflow-x-hidden">
+            {children}
+          </div>
         </div>
       </div>
     </SidebarProvider>

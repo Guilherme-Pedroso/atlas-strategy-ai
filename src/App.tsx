@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AIAssistant } from "@/components/ai/AIAssistant";
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
@@ -27,7 +27,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          {/* Definindo Index como a rota principal */}
+          <Route path="/" element={<Index />} />
+          <Route path="/landing" element={<LandingPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/library" element={<Library />} />
@@ -37,7 +39,8 @@ const App = () => (
           <Route path="/ai-history" element={<AIHistory />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/index" element={<Index />} />
+          {/* Redirecionando /index para / */}
+          <Route path="/index" element={<Navigate replace to="/" />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

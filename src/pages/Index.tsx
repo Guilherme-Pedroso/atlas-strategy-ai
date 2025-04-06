@@ -11,20 +11,25 @@ import Tools from "@/components/Tools";
 import Testimonials from "@/components/Testimonials";
 import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen w-full bg-white overflow-x-hidden">
       <Header />
-      <Hero />
-      <Problem />
-      <Comparison />
-      <HowItWorks />
-      <LibrarySection />
-      <AIFeature />
-      <Tools />
-      <Testimonials />
-      <CallToAction />
+      <main className="flex flex-col items-center">
+        <Hero />
+        <Problem />
+        <Comparison />
+        <HowItWorks />
+        <LibrarySection />
+        <AIFeature />
+        <Tools />
+        <Testimonials />
+        <CallToAction />
+      </main>
       <Footer />
     </div>
   );

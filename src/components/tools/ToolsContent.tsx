@@ -1,128 +1,147 @@
 
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Calculator, 
-  CheckSquare, 
+  FileCheck, 
   Sparkles, 
   Calendar, 
   BarChart, 
   Target, 
   Users, 
-  MessageSquare 
+  Mail, 
+  MessageCircle 
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
 
-export const ToolsContent = () => {
-  const navigate = useNavigate();
-  const { toast } = useToast();
+interface Tool {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  category: string;
+  isNew?: boolean;
+  isPremium?: boolean;
+}
+
+export const ToolsContent: React.FC = () => {
+  const isMobile = useIsMobile();
   
-  const handleToolClick = (toolName: string) => {
-    toast({
-      title: "Ferramenta em desenvolvimento",
-      description: `A ferramenta "${toolName}" será disponibilizada em breve.`
-    });
-  };
-  
-  const tools = [
+  const tools: Tool[] = [
     {
       id: "roi-calculator",
       title: "Calculadora de ROI",
-      description: "Calcule o retorno sobre investimento das suas campanhas de marketing",
-      icon: <Calculator className="h-6 w-6 text-green-500" />,
-      color: "green"
+      description: "Calcule o retorno sobre investimento das suas campanhas de marketing.",
+      icon: <Calculator className="h-6 w-6" />,
+      category: "Análise",
+      isPremium: true
     },
     {
       id: "marketing-checklist",
       title: "Checklist de Marketing",
-      description: "Verifique se sua estratégia de marketing está completa",
-      icon: <CheckSquare className="h-6 w-6 text-blue-500" />,
-      color: "blue"
+      description: "Verifique se sua estratégia de marketing cobre todos os pontos essenciais.",
+      icon: <FileCheck className="h-6 w-6" />,
+      category: "Planejamento"
     },
     {
-      id: "idea-generator",
+      id: "ai-idea-generator",
       title: "Gerador de Ideias com IA",
-      description: "Gere ideias criativas para suas campanhas de marketing",
-      icon: <Sparkles className="h-6 w-6 text-purple-500" />,
-      color: "purple"
+      description: "Use inteligência artificial para gerar ideias criativas de marketing.",
+      icon: <Sparkles className="h-6 w-6" />,
+      category: "Criação",
+      isNew: true
     },
     {
       id: "content-planner",
       title: "Planejador de Conteúdo",
-      description: "Crie um plano de conteúdo para suas redes sociais",
-      icon: <Calendar className="h-6 w-6 text-orange-500" />,
-      color: "orange"
+      description: "Organize seu calendário editorial e planeje publicações.",
+      icon: <Calendar className="h-6 w-6" />,
+      category: "Conteúdo"
     },
     {
-      id: "analytics-dashboard",
-      title: "Dashboard de Análise",
-      description: "Visualize o desempenho das suas campanhas",
-      icon: <BarChart className="h-6 w-6 text-indigo-500" />,
-      color: "indigo"
+      id: "competitor-analysis",
+      title: "Análise de Concorrentes",
+      description: "Compare sua estratégia com a dos principais concorrentes do setor.",
+      icon: <BarChart className="h-6 w-6" />,
+      category: "Análise",
+      isPremium: true
     },
     {
-      id: "kpi-tracker",
-      title: "Rastreador de KPIs",
-      description: "Acompanhe os indicadores-chave de desempenho do seu marketing",
-      icon: <Target className="h-6 w-6 text-red-500" />,
-      color: "red"
+      id: "audience-targeting",
+      title: "Segmentação de Público",
+      description: "Defina e refine seu público-alvo com base em dados demográficos e comportamentais.",
+      icon: <Target className="h-6 w-6" />,
+      category: "Estratégia"
     },
     {
       id: "persona-creator",
       title: "Criador de Personas",
-      description: "Defina as personas do seu negócio com ajuda da IA",
-      icon: <Users className="h-6 w-6 text-cyan-500" />,
-      color: "cyan"
+      description: "Crie personas detalhadas para orientar suas estratégias de marketing.",
+      icon: <Users className="h-6 w-6" />,
+      category: "Estratégia"
     },
     {
-      id: "copywriting-assistant",
-      title: "Assistente de Copywriting",
-      description: "Crie textos persuasivos para suas campanhas",
-      icon: <MessageSquare className="h-6 w-6 text-amber-500" />,
-      color: "amber"
+      id: "email-templates",
+      title: "Templates de Email",
+      description: "Acesse modelos prontos para suas campanhas de email marketing.",
+      icon: <Mail className="h-6 w-6" />,
+      category: "Conteúdo"
+    },
+    {
+      id: "social-caption-generator",
+      title: "Gerador de Legendas",
+      description: "Crie legendas impactantes para suas publicações em redes sociais.",
+      icon: <MessageCircle className="h-6 w-6" />,
+      category: "Conteúdo",
+      isNew: true
     }
   ];
-  
+
+  const categories = Array.from(new Set(tools.map(tool => tool.category)));
+
   return (
-    <div className="p-6 bg-atlas-background min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Ferramentas</h1>
-          <p className="text-atlas-neutral">
-            Utilize ferramentas especializadas para aprimorar suas estratégias de marketing
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool) => (
-            <Card 
-              key={tool.id} 
-              className="bg-atlas-background/50 border-white/10 hover:bg-atlas-background/70 transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-md bg-${tool.color}-500/10`}>
-                    {tool.icon}
-                  </div>
-                  <CardTitle className="text-lg text-white">{tool.title}</CardTitle>
+    <div className="min-h-screen bg-atlas-background text-white p-4 md:p-6 lg:p-8">
+      <div className="mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">Ferramentas de Marketing</h1>
+        <p className="text-atlas-neutral">
+          Utilize nossas ferramentas especializadas para impulsionar sua estratégia de marketing.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {tools.map((tool) => (
+          <Card key={tool.id} className="bg-atlas-background/50 border border-white/10 hover:border-atlas-highlight/50 transition-all overflow-hidden">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-start">
+                <div className="p-2 rounded-md bg-atlas-highlight/10 text-atlas-highlight">
+                  {tool.icon}
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-atlas-neutral">{tool.description}</p>
-              </CardContent>
-              <CardFooter>
-                <Button 
-                  className="w-full bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90"
-                  onClick={() => handleToolClick(tool.title)}
-                >
-                  Acessar ferramenta
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+                <div className="flex gap-2">
+                  {tool.isNew && (
+                    <Badge className="bg-atlas-highlight text-black">Novo</Badge>
+                  )}
+                  {tool.isPremium && (
+                    <Badge className="bg-atlas-secondary/80">Premium</Badge>
+                  )}
+                </div>
+              </div>
+              <CardTitle className="mt-3 text-lg">{tool.title}</CardTitle>
+              <Badge variant="outline" className="w-fit mt-1 text-xs">{tool.category}</Badge>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-atlas-neutral">
+                {tool.description}
+              </CardDescription>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full bg-white/5 hover:bg-white/10 border border-white/10">
+                Acessar Ferramenta
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import StrategyDiagnostic from "@/components/onboarding/StrategyDiagnostic";
 import AiProcessing from "@/components/onboarding/AiProcessing";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Types for our form data
 export type OnboardingData = {
@@ -47,6 +48,7 @@ const Onboarding = () => {
   const [data, setData] = useState<OnboardingData>(initialData);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   // Calculate progress percentage
   useEffect(() => {
@@ -111,7 +113,7 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-atlas-background text-white">
+    <div className="min-h-screen flex flex-col bg-atlas-background text-white overflow-x-hidden">
       {/* Progress bar */}
       <div className="w-full p-4">
         <Progress value={progress} className="h-2 bg-white/10" />
@@ -127,7 +129,7 @@ const Onboarding = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="bg-black/20 backdrop-blur-sm p-8 rounded-xl shadow-xl"
+              className="bg-black/20 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl shadow-xl"
             >
               {step === 0 && (
                 <LeadCapture data={data} updateData={updateData} />
@@ -142,12 +144,13 @@ const Onboarding = () => {
               )}
               
               {/* Navigation buttons */}
-              <div className="flex justify-between mt-10">
+              <div className="flex justify-between mt-6 sm:mt-8 md:mt-10">
                 {step > 0 ? (
                   <Button 
                     variant="outline" 
                     onClick={prevStep}
                     className="text-white border-white/20 hover:bg-white/10"
+                    size={isMobile ? "sm" : "default"}
                   >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Voltar
@@ -160,6 +163,7 @@ const Onboarding = () => {
                   <Button 
                     onClick={nextStep}
                     className="bg-atlas-highlight text-black hover:bg-atlas-highlight/90"
+                    size={isMobile ? "sm" : "default"}
                   >
                     Continuar
                     <ArrowRight className="ml-2 h-4 w-4" />
