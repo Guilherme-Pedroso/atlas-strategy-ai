@@ -59,14 +59,22 @@ const Settings = () => {
   });
   
   // Properly type both the category and setting parameters
-  const handleToggleSetting = <T extends keyof SettingsState>(category: T, setting: SettingsKeys<T>) => {
-    setSettings(prev => ({
-      ...prev,
-      [category]: {
-        ...prev[category],
-        [setting]: !prev[category][setting as keyof typeof prev[category]]
-      }
-    }));
+  const handleToggleSetting = <T extends keyof SettingsState>(
+    category: T, 
+    setting: SettingsKeys<T>
+  ) => {
+    setSettings(prev => {
+      // Create a safe copy of the category object
+      const categorySettings = { ...prev[category] };
+      // Toggle the specific setting
+      return {
+        ...prev,
+        [category]: {
+          ...categorySettings,
+          [setting]: !categorySettings[setting as keyof typeof categorySettings]
+        }
+      };
+    });
   };
   
   const handleSaveSettings = () => {
