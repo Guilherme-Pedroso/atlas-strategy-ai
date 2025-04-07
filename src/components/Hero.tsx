@@ -2,11 +2,12 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   return (
     <section className="relative bg-atlas-background text-white overflow-hidden">
@@ -25,26 +26,32 @@ const Hero = () => {
             Você responde. A IA analisa. A estratégia aparece pronta — feita sob medida para sua empresa.
           </p>
           
-          <div className="mt-8 flex flex-col items-center">
+          <div className="mt-8 flex flex-col sm:flex-row sm:justify-center items-center gap-4">
             <Button 
               className="btn-cta text-base md:text-lg px-6 py-5 md:px-8 md:py-6 rounded-lg w-full sm:w-auto transform transition-transform duration-300 hover:scale-105" 
               size="lg"
-              asChild
+              onClick={() => navigate("/signup")}
             >
-              <Link to="/onboarding" className="flex items-center justify-center">
-                {isMobile ? "Comece agora" : "Comece agora — a partir de R$ 99/mês"}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              {isMobile ? "Comece agora" : "Comece agora — a partir de R$ 99/mês"}
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
-            <p className="text-sm md:text-base mt-4 text-atlas-neutral opacity-80 px-2">
-              Nada de PDFs genéricos. Nada pra baixar. Só ação estratégica real, no seu tempo.
-            </p>
-            
-            <p className="text-sm md:text-base mt-4 text-atlas-highlight font-medium max-w-2xl px-2">
-              Inclui acesso completo à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares de reais para entregar.
-            </p>
+            <Button 
+              variant="outline" 
+              className="text-base border-white/10 text-white hover:bg-white/5 w-full sm:w-auto"
+              onClick={() => navigate("/pricing")}
+            >
+              Conheça nossos planos
+            </Button>
           </div>
+          
+          <p className="text-sm md:text-base mt-4 text-atlas-neutral opacity-80 px-2">
+            Nada de PDFs genéricos. Nada pra baixar. Só ação estratégica real, no seu tempo.
+          </p>
+          
+          <p className="text-sm md:text-base mt-4 text-atlas-highlight font-medium max-w-2xl px-2">
+            Inclui acesso completo à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares de reais para entregar.
+          </p>
         </div>
       </div>
     </section>

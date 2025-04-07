@@ -7,6 +7,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AIAssistant } from "@/components/ai/AIAssistant";
 import Index from "./pages/Index";
 import Onboarding from "./pages/Onboarding";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Checkout from "./pages/Checkout";
+import GeneratingDocuments from "./pages/GeneratingDocuments";
 import Library from "./pages/Library";
 import Dashboard from "./pages/Dashboard";
 import SmartDocuments from "./pages/SmartDocuments";
@@ -31,11 +35,20 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Definindo Index como a rota principal */}
+          {/* Páginas públicas */}
           <Route path="/" element={<Index />} />
           <Route path="/landing" element={<LandingPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          
+          {/* Fluxo de onboarding e pagamento */}
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/generating-documents" element={<GeneratingDocuments />} />
+          <Route path="/checkout" element={<Checkout />} />
+          
+          {/* Páginas protegidas (área logada) */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/library" element={<Library />} />
           <Route path="/documents" element={<SmartDocuments />} />
           <Route path="/document/:documentId" element={<DocumentViewer />} />
@@ -43,10 +56,11 @@ const App = () => (
           <Route path="/plans" element={<Plans />} />
           <Route path="/ai-history" element={<AIHistory />} />
           <Route path="/tools" element={<Tools />} />
-          <Route path="/pricing" element={<Pricing />} />
+          
           {/* Redirecionando /index para / */}
           <Route path="/index" element={<Navigate replace to="/" />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          
+          {/* Rota de captura geral para 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AIAssistant />

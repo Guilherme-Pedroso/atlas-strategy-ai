@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface AiProcessingProps {
   onFinish: () => void;
@@ -12,6 +13,7 @@ const AiProcessing: React.FC<AiProcessingProps> = ({ onFinish }) => {
   const [currentMessage, setCurrentMessage] = useState(0);
   const [processing, setProcessing] = useState(true);
   const [progressValue, setProgressValue] = useState(0);
+  const navigate = useNavigate();
   
   const processingMessages = [
     "Analisando seu estágio de negócio...",
@@ -46,6 +48,11 @@ const AiProcessing: React.FC<AiProcessingProps> = ({ onFinish }) => {
       clearInterval(messageInterval);
     };
   }, [processingMessages.length]);
+
+  const handleContinue = () => {
+    // Redirecionar para a tela de geração de documentos
+    navigate("/generating-documents");
+  };
 
   return (
     <div className="space-y-10 text-center">
@@ -138,11 +145,11 @@ const AiProcessing: React.FC<AiProcessingProps> = ({ onFinish }) => {
             transition={{ delay: 0.5 }}
           >
             <Button 
-              onClick={onFinish} 
+              onClick={handleContinue} 
               className="bg-atlas-highlight text-black hover:bg-atlas-highlight/90 text-lg px-8 py-6 h-auto"
               size="lg"
             >
-              Acessar meu painel estratégico
+              Continuar para o meu plano estratégico
             </Button>
           </motion.div>
         </div>

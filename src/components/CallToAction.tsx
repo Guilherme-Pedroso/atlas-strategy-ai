@@ -2,45 +2,46 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CallToAction = () => {
+  const navigate = useNavigate();
+  
   return (
-    <section className="py-20 bg-atlas-background text-white">
-      <div className="container-atlas text-center">
-        <div className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Se você tem um negócio, <span className="text-atlas-highlight">já devia estar aqui dentro</span>.
+    <section className="relative bg-atlas-background py-20 md:py-28 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-20 right-10 w-80 h-80 bg-atlas-secondary opacity-10 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-80 h-80 bg-atlas-highlight opacity-10 rounded-full filter blur-3xl"></div>
+      </div>
+      
+      <div className="container-atlas relative z-10">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+            Construa estratégias <span className="text-atlas-highlight">inteligentes</span> sem as dores de cabeça tradicionais
           </h2>
           
-          <p className="text-xl text-atlas-neutral">
-            A consultoria estratégica que você nunca teve — agora, automática, personalizada e pronta pra rodar.
+          <p className="text-lg md:text-xl text-atlas-neutral">
+            Pare de gastar tempo tentando elaborar planos de marketing sem direção. 
+            Comece a obter resultados com estratégias personalizadas criadas em minutos.
           </p>
           
-          <div className="mt-10">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
             <Button 
-              className="btn-cta text-lg px-8 py-6 rounded-lg w-full sm:w-auto transform transition-transform duration-300 hover:scale-105" 
+              className="btn-cta text-base px-8 py-6 h-auto transform transition-transform hover:scale-105" 
               size="lg"
-              asChild
+              onClick={() => navigate("/signup")}
             >
-              <Link to="/onboarding">
-                Comece agora — a partir de R$ 99/mês
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              Começar agora
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
-            <p className="text-sm mt-6 text-atlas-neutral opacity-80">
-              Você pode sair depois. Mas vai se perguntar por que perdeu tanto tempo fazendo tudo sozinho.
-            </p>
-          </div>
-          
-          <div className="mt-6">
-            <Link 
-              to="/library" 
-              className="text-atlas-highlight hover:text-atlas-highlight/80 transition-colors underline font-medium"
+            <Button 
+              variant="outline" 
+              className="text-base border-white/10 text-white hover:bg-white/5"
+              onClick={() => navigate("/pricing")}
             >
-              Explore nossa biblioteca estratégica
-            </Link>
+              Conheça nossos planos
+            </Button>
           </div>
         </div>
       </div>

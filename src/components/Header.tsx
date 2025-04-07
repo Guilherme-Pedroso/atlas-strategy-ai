@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,26 +35,29 @@ const Header = () => {
       <div className="container-atlas">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-white">
+            <Link to="/" className="text-2xl font-bold text-white">
               Marketing<span className="text-atlas-highlight">Atlas</span>
-            </span>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-white/80 hover:text-white transition-colors">
+            <Link to="/" className="text-white/80 hover:text-white transition-colors">
               Como funciona
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">
+            </Link>
+            <Link to="/pricing" className="text-white/80 hover:text-white transition-colors">
               Preços
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">
+            </Link>
+            <Link to="/" className="text-white/80 hover:text-white transition-colors">
               Blog
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">
+            </Link>
+            <Link to="/" className="text-white/80 hover:text-white transition-colors">
               Contato
-            </a>
-            <Button className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors">
+            </Link>
+            <Button 
+              className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors"
+              onClick={() => navigate("/login")}
+            >
               Entrar
             </Button>
           </nav>
@@ -70,19 +75,22 @@ const Header = () => {
         {isMobileMenuOpen && (
           <nav className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
-              <a href="#" className="text-white/80 hover:text-white transition-colors py-2">
+              <Link to="/" className="text-white/80 hover:text-white transition-colors py-2">
                 Como funciona
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors py-2">
+              </Link>
+              <Link to="/pricing" className="text-white/80 hover:text-white transition-colors py-2">
                 Preços
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors py-2">
+              </Link>
+              <Link to="/" className="text-white/80 hover:text-white transition-colors py-2">
                 Blog
-              </a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors py-2">
+              </Link>
+              <Link to="/" className="text-white/80 hover:text-white transition-colors py-2">
                 Contato
-              </a>
-              <Button className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors w-full">
+              </Link>
+              <Button 
+                className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors w-full"
+                onClick={() => navigate("/login")}
+              >
                 Entrar
               </Button>
             </div>
