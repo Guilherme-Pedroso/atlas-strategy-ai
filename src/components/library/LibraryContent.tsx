@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LibraryItem } from "@/types/library";
-import { Download, MessageSquare, Clock } from "lucide-react";
+import { FileText, MessageSquare, Clock, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface LibraryContentProps {
   items: LibraryItem[];
@@ -42,6 +43,29 @@ export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
       default:
         return type;
     }
+  };
+
+  // Map item types to document routes
+  const getDocumentRoute = (type: string, id: string) => {
+    const typeMap: Record<string, string> = {
+      "calculator": "exemplo-roi",
+      "template": "exemplo-email",
+      "guide": "exemplo-branding",
+      "checklist": "exemplo-content-plan",
+      "swot": "exemplo-swot",
+      "pitch": "exemplo-pitch"
+    };
+    
+    // Default to document type from id if available
+    const documentType = id.includes("swot") ? "exemplo-swot" : 
+                         id.includes("roi") ? "exemplo-roi" :
+                         id.includes("email") ? "exemplo-email" :
+                         id.includes("content") ? "exemplo-content-plan" :
+                         id.includes("pitch") ? "exemplo-pitch" :
+                         id.includes("brand") ? "exemplo-branding" :
+                         typeMap[type] || "exemplo-swot";
+    
+    return `/document/${documentType}`;
   };
 
   return (
@@ -104,10 +128,12 @@ export const LibraryContent = ({ items, onRequestAI }: LibraryContentProps) => {
                     <Button
                       size="sm"
                       className="h-8 gap-1 bg-white/10 text-white hover:bg-white/20"
-                      onClick={() => window.open(item.downloadUrl, "_blank")}
+                      asChild
                     >
-                      <Download className="h-3.5 w-3.5" />
-                      <span className="hidden sm:inline">Baixar</span>
+                      <Link to={getDocumentRoute(item.type, item.id)}>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                        <span className="hidden sm:inline">Abrir</span>
+                      </Link>
                     </Button>
                     <Button
                       size="sm"

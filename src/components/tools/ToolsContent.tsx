@@ -9,12 +9,14 @@ import {
   Target, 
   Users, 
   Mail, 
-  MessageCircle 
+  MessageCircle, 
+  ExternalLink 
 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 interface Tool {
   id: string;
@@ -24,6 +26,7 @@ interface Tool {
   category: string;
   isNew?: boolean;
   isPremium?: boolean;
+  documentPath: string;
 }
 
 export const ToolsContent: React.FC = () => {
@@ -36,14 +39,16 @@ export const ToolsContent: React.FC = () => {
       description: "Calcule o retorno sobre investimento das suas campanhas de marketing.",
       icon: <Calculator className="h-6 w-6" />,
       category: "Análise",
-      isPremium: true
+      isPremium: true,
+      documentPath: "/document/exemplo-roi"
     },
     {
       id: "marketing-checklist",
       title: "Checklist de Marketing",
       description: "Verifique se sua estratégia de marketing cobre todos os pontos essenciais.",
       icon: <FileCheck className="h-6 w-6" />,
-      category: "Planejamento"
+      category: "Planejamento",
+      documentPath: "/document/exemplo-content-plan"
     },
     {
       id: "ai-idea-generator",
@@ -51,14 +56,16 @@ export const ToolsContent: React.FC = () => {
       description: "Use inteligência artificial para gerar ideias criativas de marketing.",
       icon: <Sparkles className="h-6 w-6" />,
       category: "Criação",
-      isNew: true
+      isNew: true,
+      documentPath: "/ai"
     },
     {
       id: "content-planner",
       title: "Planejador de Conteúdo",
       description: "Organize seu calendário editorial e planeje publicações.",
       icon: <Calendar className="h-6 w-6" />,
-      category: "Conteúdo"
+      category: "Conteúdo",
+      documentPath: "/document/exemplo-content-plan"
     },
     {
       id: "competitor-analysis",
@@ -66,28 +73,32 @@ export const ToolsContent: React.FC = () => {
       description: "Compare sua estratégia com a dos principais concorrentes do setor.",
       icon: <BarChart className="h-6 w-6" />,
       category: "Análise",
-      isPremium: true
+      isPremium: true,
+      documentPath: "/document/exemplo-swot"
     },
     {
       id: "audience-targeting",
       title: "Segmentação de Público",
       description: "Defina e refine seu público-alvo com base em dados demográficos e comportamentais.",
       icon: <Target className="h-6 w-6" />,
-      category: "Estratégia"
+      category: "Estratégia",
+      documentPath: "/document/exemplo-branding"
     },
     {
       id: "persona-creator",
       title: "Criador de Personas",
       description: "Crie personas detalhadas para orientar suas estratégias de marketing.",
       icon: <Users className="h-6 w-6" />,
-      category: "Estratégia"
+      category: "Estratégia",
+      documentPath: "/document/exemplo-branding"
     },
     {
       id: "email-templates",
       title: "Templates de Email",
       description: "Acesse modelos prontos para suas campanhas de email marketing.",
       icon: <Mail className="h-6 w-6" />,
-      category: "Conteúdo"
+      category: "Conteúdo",
+      documentPath: "/document/exemplo-email"
     },
     {
       id: "social-caption-generator",
@@ -95,7 +106,8 @@ export const ToolsContent: React.FC = () => {
       description: "Crie legendas impactantes para suas publicações em redes sociais.",
       icon: <MessageCircle className="h-6 w-6" />,
       category: "Conteúdo",
-      isNew: true
+      isNew: true,
+      documentPath: "/document/exemplo-email"
     }
   ];
 
@@ -136,8 +148,14 @@ export const ToolsContent: React.FC = () => {
               </CardDescription>
             </CardContent>
             <CardFooter>
-              <Button className="w-full bg-white/5 hover:bg-white/10 border border-white/10">
-                Acessar Ferramenta
+              <Button 
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/10"
+                asChild
+              >
+                <Link to={tool.documentPath} className="flex items-center justify-center">
+                  <span>Acessar Ferramenta</span>
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </CardFooter>
           </Card>

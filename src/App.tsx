@@ -17,6 +17,7 @@ import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import Tools from "./pages/Tools";
 import Pricing from "./pages/Pricing";
+import DocumentViewer from "./pages/DocumentViewer";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/library" element={<Library />} />
           <Route path="/documents" element={<SmartDocuments />} />
+          <Route path="/document/:documentId" element={<DocumentViewer />} />
           <Route path="/ai" element={<AIStrategy />} />
           <Route path="/plans" element={<Plans />} />
           <Route path="/ai-history" element={<AIHistory />} />
