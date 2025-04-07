@@ -10,11 +10,32 @@ import { Bell, Globe, Lock, LogOut, Moon, Shield, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
+// Define the structure of our settings object with a type
+type SettingsState = {
+  notifications: {
+    emailDigest: boolean;
+    newFeatures: boolean;
+    documentUpdates: boolean;
+    marketingEmails: boolean;
+  };
+  preferences: {
+    darkMode: boolean;
+    compactView: boolean;
+    autoSave: boolean;
+    language: string;
+  };
+  privacy: {
+    shareAnalytics: boolean;
+    storeHistory: boolean;
+    allowCookies: boolean;
+  };
+};
+
 const Settings = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   
-  const [settings, setSettings] = useState({
+  const [settings, setSettings] = useState<SettingsState>({
     notifications: {
       emailDigest: true,
       newFeatures: true,
@@ -34,7 +55,8 @@ const Settings = () => {
     }
   });
   
-  const handleToggleSetting = (category: keyof typeof settings, setting: string) => {
+  // Fix: Make category parameter properly typed as a key of SettingsState
+  const handleToggleSetting = (category: keyof SettingsState, setting: string) => {
     setSettings(prev => ({
       ...prev,
       [category]: {
