@@ -10,13 +10,13 @@ const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative bg-atlas-background text-white overflow-hidden">
+    <section className="relative bg-atlas-background text-white overflow-hidden w-full">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-atlas-highlight opacity-10 rounded-full filter blur-3xl animate-pulse-soft"></div>
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-atlas-secondary opacity-10 rounded-full filter blur-3xl animate-pulse-soft"></div>
       </div>
       
-      <div className="container-atlas relative z-10 py-12 md:py-24 px-4 md:px-6">
+      <div className="container mx-auto relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             Sua consultoria de marketing. <span className="gradient-text">Inteligente</span>, personalizada e pronta em minutos.

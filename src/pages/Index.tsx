@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full bg-white overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
+      <main className="flex flex-col items-center w-full">
         <Hero />
         <Problem />
         <Comparison />

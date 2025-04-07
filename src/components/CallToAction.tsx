@@ -8,13 +8,13 @@ const CallToAction = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="relative bg-atlas-background py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-atlas-background py-20 md:py-28 overflow-hidden w-full">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 right-10 w-80 h-80 bg-atlas-secondary opacity-10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-20 left-10 w-80 h-80 bg-atlas-highlight opacity-10 rounded-full filter blur-3xl"></div>
       </div>
       
-      <div className="container-atlas relative z-10">
+      <div className="container mx-auto relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
             Construa estratégias <span className="text-atlas-highlight">inteligentes</span> sem as dores de cabeça tradicionais

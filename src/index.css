@@ -67,6 +67,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  html {
+    width: 100%;
+    overflow-x: hidden;
   }
 }
 
