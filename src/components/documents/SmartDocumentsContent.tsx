@@ -58,6 +58,7 @@ interface Document {
   updatedAt: Date;
   status: "draft" | "published" | "archived";
   tags: string[];
+  route?: string;
 }
 
 export const SmartDocumentsContent = () => {
@@ -73,7 +74,8 @@ export const SmartDocumentsContent = () => {
       createdAt: new Date(2025, 0, 15),
       updatedAt: new Date(2025, 2, 20),
       status: "published",
-      tags: ["marketing", "2025", "planejamento"]
+      tags: ["marketing", "2025", "planejamento"],
+      route: "/document/plano-marketing"
     },
     {
       id: "doc-2",
@@ -82,7 +84,8 @@ export const SmartDocumentsContent = () => {
       createdAt: new Date(2025, 1, 10),
       updatedAt: new Date(2025, 1, 10),
       status: "draft",
-      tags: ["análise", "estratégia"]
+      tags: ["análise", "estratégia"],
+      route: "/document/exemplo-swot"
     },
     {
       id: "doc-3",
@@ -91,7 +94,8 @@ export const SmartDocumentsContent = () => {
       createdAt: new Date(2025, 2, 5),
       updatedAt: new Date(2025, 3, 1),
       status: "published",
-      tags: ["vendas", "b2b"]
+      tags: ["vendas", "b2b"],
+      route: "/document/exemplo-branding"
     },
     {
       id: "doc-4",
@@ -100,33 +104,41 @@ export const SmartDocumentsContent = () => {
       createdAt: new Date(2025, 3, 10),
       updatedAt: new Date(2025, 3, 12),
       status: "draft",
-      tags: ["conteúdo", "planejamento"]
+      tags: ["conteúdo", "planejamento"],
+      route: "/document/exemplo-content-plan"
     },
     {
       id: "doc-5",
-      name: "Benchmark de Concorrentes",
-      type: "Análise",
+      name: "Pitch Deck",
+      type: "Apresentação",
       createdAt: new Date(2025, 2, 22),
       updatedAt: new Date(2025, 2, 25),
       status: "published",
-      tags: ["concorrência", "mercado"]
+      tags: ["pitch", "startup"],
+      route: "/document/pitch-deck"
     },
     {
       id: "doc-6",
-      name: "Planejamento de Campanha",
-      type: "Estratégia",
+      name: "Criador de Personas",
+      type: "Template",
       createdAt: new Date(2025, 1, 5),
       updatedAt: new Date(2025, 2, 18),
-      status: "archived",
-      tags: ["campanha", "planejamento"]
+      status: "draft",
+      tags: ["personas", "público-alvo"],
+      route: "/document/persona-creator"
     }
   ]);
   
   const handleOpenDocument = (docId: string) => {
-    toast({
-      title: "Documento aberto",
-      description: "Carregando conteúdo do documento..."
-    });
+    const doc = documents.find(d => d.id === docId);
+    if (doc?.route) {
+      navigate(doc.route);
+    } else {
+      toast({
+        title: "Documento não encontrado",
+        description: "Não foi possível abrir este documento."
+      });
+    }
   };
   
   const handleDuplicateDocument = (doc: Document) => {
@@ -216,7 +228,7 @@ export const SmartDocumentsContent = () => {
                     Escolha um tipo de documento para começar.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="grid grid-cols-2 gap-4 py-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
                   <Card className="bg-white/5 border-white/10 hover:bg-white/10 cursor-pointer transition-colors">
                     <CardContent className="p-4 flex flex-col items-center">
                       <div className="p-2 rounded-md bg-blue-500/10 mb-2">
@@ -295,7 +307,7 @@ export const SmartDocumentsContent = () => {
         </div>
         
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="bg-atlas-background/50 border border-white/10 mb-6">
+          <TabsList className="bg-atlas-background/50 border border-white/10 mb-6 overflow-x-auto flex-nowrap max-w-full w-auto">
             <TabsTrigger 
               value="all" 
               className="data-[state=active]:bg-white/10 data-[state=active]:text-white text-atlas-neutral"
@@ -336,7 +348,8 @@ export const SmartDocumentsContent = () => {
                     {filteredDocuments.map((doc) => (
                       <Card 
                         key={doc.id} 
-                        className="bg-atlas-background/50 border-white/10 hover:bg-atlas-background/70 transition-all duration-300 transform hover:-translate-y-1"
+                        className="bg-atlas-background/50 border-white/10 hover:bg-atlas-background/70 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                        onClick={() => handleOpenDocument(doc.id)}
                       >
                         <CardContent className="p-0">
                           <div className="p-6 pb-4">
@@ -353,7 +366,7 @@ export const SmartDocumentsContent = () => {
                                 
                                 <DropdownMenu>
                                   <DropdownMenuTrigger asChild>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-atlas-neutral hover:text-white ml-1">
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-atlas-neutral hover:text-white ml-1" onClick={(e) => e.stopPropagation()}>
                                       <MoreHorizontal className="h-4 w-4" />
                                     </Button>
                                   </DropdownMenuTrigger>
@@ -362,42 +375,51 @@ export const SmartDocumentsContent = () => {
                                     <DropdownMenuSeparator className="bg-white/10" />
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleOpenDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleOpenDocument(doc.id);
+                                      }}
                                     >
                                       <EyeIcon className="h-4 w-4 mr-2" />
                                       Visualizar
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleOpenDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleOpenDocument(doc.id);
+                                      }}
                                     >
                                       <Edit className="h-4 w-4 mr-2" />
                                       Editar
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleDuplicateDocument(doc)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDuplicateDocument(doc);
+                                      }}
                                     >
                                       <Copy className="h-4 w-4 mr-2" />
                                       Duplicar
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleShareDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleShareDocument(doc.id);
+                                      }}
                                     >
                                       <Share2 className="h-4 w-4 mr-2" />
                                       Compartilhar
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                      className="cursor-pointer hover:bg-white/5"
-                                    >
-                                      <Download className="h-4 w-4 mr-2" />
-                                      Exportar
-                                    </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-white/10" />
                                     <DropdownMenuItem 
                                       className="cursor-pointer text-red-400 hover:bg-white/5 hover:text-red-400"
-                                      onClick={() => handleDeleteDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteDocument(doc.id);
+                                      }}
                                     >
                                       <Trash2 className="h-4 w-4 mr-2" />
                                       Excluir
@@ -516,28 +538,31 @@ export const SmartDocumentsContent = () => {
                                   <DropdownMenuContent className="bg-atlas-background border-white/10 text-white">
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleOpenDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleOpenDocument(doc.id);
+                                      }}
                                     >
                                       <Edit className="h-4 w-4 mr-2" />
                                       Editar
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       className="cursor-pointer hover:bg-white/5"
-                                      onClick={() => handleDuplicateDocument(doc)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDuplicateDocument(doc);
+                                      }}
                                     >
                                       <Copy className="h-4 w-4 mr-2" />
                                       Duplicar
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                      className="cursor-pointer hover:bg-white/5"
-                                    >
-                                      <Download className="h-4 w-4 mr-2" />
-                                      Exportar
-                                    </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-white/10" />
                                     <DropdownMenuItem 
                                       className="cursor-pointer text-red-400 hover:bg-white/5 hover:text-red-400"
-                                      onClick={() => handleDeleteDocument(doc.id)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteDocument(doc.id);
+                                      }}
                                     >
                                       <Trash2 className="h-4 w-4 mr-2" />
                                       Excluir

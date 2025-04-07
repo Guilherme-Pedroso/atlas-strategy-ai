@@ -17,11 +17,11 @@ const Hero = () => {
       
       <div className="container-atlas relative z-10 py-12 md:py-24 px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             Sua consultoria de marketing. <span className="gradient-text">Inteligente</span>, personalizada e pronta em minutos.
           </h1>
           
-          <p className="text-lg md:text-xl lg:text-2xl text-atlas-neutral font-medium">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-atlas-neutral font-medium">
             Você responde. A IA analisa. A estratégia aparece pronta — feita sob medida para sua empresa.
           </p>
           

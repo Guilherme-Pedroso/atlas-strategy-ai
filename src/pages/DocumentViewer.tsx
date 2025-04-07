@@ -10,6 +10,9 @@ import { EmailTemplateDocument } from "@/components/documents/templates/EmailTem
 import { ContentPlanDocument } from "@/components/documents/templates/ContentPlanDocument";
 import { PitchDocument } from "@/components/documents/templates/PitchDocument";
 import { BrandingDocument } from "@/components/documents/templates/BrandingDocument";
+import { PitchDeckDocument } from "@/components/documents/templates/PitchDeckDocument";
+import { MarketingPlanDocument } from "@/components/documents/templates/MarketingPlanDocument";
+import { PersonaCreatorDocument } from "@/components/documents/templates/PersonaCreatorDocument";
 import { useToast } from "@/hooks/use-toast";
 
 const DocumentViewer = () => {
@@ -26,7 +29,10 @@ const DocumentViewer = () => {
     "exemplo-email": <EmailTemplateDocument />,
     "exemplo-content-plan": <ContentPlanDocument />,
     "exemplo-pitch": <PitchDocument />,
-    "exemplo-branding": <BrandingDocument />
+    "exemplo-branding": <BrandingDocument />,
+    "pitch-deck": <PitchDeckDocument />,
+    "plano-marketing": <MarketingPlanDocument />,
+    "persona-creator": <PersonaCreatorDocument />
   };
 
   // Map document IDs to titles
@@ -36,7 +42,10 @@ const DocumentViewer = () => {
     "exemplo-email": "Template de Email Marketing",
     "exemplo-content-plan": "Plano de Conteúdo",
     "exemplo-pitch": "Template de Pitch",
-    "exemplo-branding": "Estratégia de Marca"
+    "exemplo-branding": "Estratégia de Marca",
+    "pitch-deck": "Pitch Deck",
+    "plano-marketing": "Plano de Marketing em Uma Página",
+    "persona-creator": "Criador de Personas"
   };
 
   useEffect(() => {
@@ -66,7 +75,7 @@ const DocumentViewer = () => {
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-atlas-background text-white p-4">
           <h1 className="text-2xl font-bold mb-4">Documento não encontrado</h1>
           <p className="text-atlas-neutral mb-6">O documento que você está procurando não existe ou foi removido.</p>
-          <Button onClick={() => navigate("/library")}>
+          <Button onClick={() => navigate("/library")} className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90">
             Voltar para a Biblioteca
           </Button>
         </div>
@@ -84,7 +93,7 @@ const DocumentViewer = () => {
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  onClick={() => navigate("/library")}
+                  onClick={() => navigate(-1)}
                   className="text-white hover:text-atlas-highlight hover:bg-white/5"
                 >
                   <ArrowLeft className="h-5 w-5" />

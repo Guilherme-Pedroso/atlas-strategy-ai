@@ -18,6 +18,9 @@ import NotFound from "./pages/NotFound";
 import Tools from "./pages/Tools";
 import Pricing from "./pages/Pricing";
 import DocumentViewer from "./pages/DocumentViewer";
+import MarketingPlanDocument from "./components/documents/templates/MarketingPlanDocument";
+import PitchDeckDocument from "./components/documents/templates/PitchDeckDocument";
+import PersonaCreatorDocument from "./components/documents/templates/PersonaCreatorDocument";
 
 const queryClient = new QueryClient();
 

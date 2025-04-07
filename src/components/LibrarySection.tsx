@@ -6,7 +6,8 @@ import {
   FileText, 
   Calendar, 
   LayoutList, 
-  MessageSquare
+  MessageSquare,
+  ArrowRight
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,31 +19,37 @@ const LibrarySection = () => {
     {
       icon: <Grid2X2 className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
       title: "Matriz SWOT interativa",
+      description: "Analise forças, fraquezas, oportunidades e ameaças do seu negócio",
       link: "/document/exemplo-swot"
     },
     {
       icon: <Calculator className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
       title: "Calculadoras de ROI, CAC, LTV",
+      description: "Calcule métricas importantes para seu negócio",
       link: "/document/exemplo-roi"
     },
     {
       icon: <FileText className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
-      title: "Modelos de proposta comercial",
-      link: "/document/exemplo-pitch"
+      title: "Pitch Deck completo",
+      description: "Apresentação profissional para investidores",
+      link: "/document/pitch-deck"
     },
     {
       icon: <Calendar className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
-      title: "Cronogramas de conteúdo com IA",
-      link: "/document/exemplo-content-plan"
+      title: "Plano de Marketing",
+      description: "Estratégia completa em uma única página",
+      link: "/document/plano-marketing"
     },
     {
       icon: <LayoutList className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
-      title: "Estratégias de funil para cada estágio",
-      link: "/document/exemplo-branding"
+      title: "Criador de Personas",
+      description: "Defina seu público-alvo ideal com detalhes",
+      link: "/document/persona-creator"
     },
     {
       icon: <MessageSquare className="h-8 w-8 md:h-10 md:w-10 text-atlas-highlight" />,
-      title: "Templates prontos de pitch, briefing, storytelling",
+      title: "Templates de e-mail e mensagem",
+      description: "Comunicação pronta para diferentes ocasiões",
       link: "/document/exemplo-email"
     }
   ];
@@ -62,11 +69,12 @@ const LibrarySection = () => {
           </p>
 
           <Button 
-            className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90 mb-8"
+            className="bg-atlas-highlight text-atlas-background hover:bg-atlas-highlight/90 mb-8 w-full sm:w-auto"
             asChild
           >
-            <Link to="/library">
+            <Link to="/library" className="flex items-center justify-center">
               Explorar biblioteca completa
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -76,14 +84,17 @@ const LibrarySection = () => {
             <Link 
               to={item.link} 
               key={index}
-              className="feature-card hover:border-atlas-highlight transition-all duration-300 flex flex-col items-center p-4 md:p-6 hover:shadow-md hover:shadow-atlas-highlight/10 no-underline"
+              className="feature-card hover:border-atlas-highlight transition-all duration-300 flex flex-col items-center p-4 md:p-6 hover:shadow-md hover:shadow-atlas-highlight/10 no-underline bg-white rounded-lg border border-gray-200"
             >
               <div className="mb-4 transform transition-transform duration-300 hover:scale-110">
                 {item.icon}
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-atlas-background text-center">
+              <h3 className="text-base md:text-lg font-semibold text-atlas-background text-center mb-2">
                 {item.title}
               </h3>
+              <p className="text-sm text-gray-600 text-center">
+                {item.description}
+              </p>
             </Link>
           ))}
         </div>
