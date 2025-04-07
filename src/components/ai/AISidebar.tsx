@@ -118,9 +118,9 @@ export const AISidebar = () => {
   };
   
   return (
-    <div className="w-80 border-l border-white/10 bg-atlas-background/30 backdrop-blur-sm p-4 hidden lg:block overflow-hidden flex flex-col h-full">
+    <div className="w-80 border-l border-white/10 bg-atlas-background/30 backdrop-blur-sm flex flex-col h-full overflow-hidden">
       {/* Chat History Section */}
-      <div className="mb-4">
+      <div className="flex-1 flex flex-col min-h-0 p-4">
         <div className="flex justify-between items-center mb-3">
           <h3 className="text-white font-medium text-sm">Histórico de conversas</h3>
           <Button 
@@ -143,7 +143,7 @@ export const AISidebar = () => {
           />
         </div>
         
-        <ScrollArea className="h-[calc(100vh-300px)]">
+        <ScrollArea className="flex-1">
           {chatHistory.length > 0 ? (
             <div className="space-y-2">
               {chatHistory.map((chat) => (
@@ -221,66 +221,68 @@ export const AISidebar = () => {
         </ScrollArea>
       </div>
       
-      <Separator className="bg-white/10 my-6" />
-      
-      {/* AI Recommendations */}
-      <div className="mb-6">
-        <h3 className="text-white font-medium text-sm mb-3">Recomendações da IA</h3>
-        <div className="space-y-3">
-          <Button 
-            variant="outline" 
-            className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
-            onClick={() => handleQuickAction("Análise de concorrentes")}
-          >
-            <BarChart className="h-4 w-4 mr-2 text-atlas-secondary" />
-            Análise de concorrentes
-          </Button>
-          <Button 
-            variant="outline" 
-            className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
-            onClick={() => handleQuickAction("Calendário editorial")}
-          >
-            <PenTool className="h-4 w-4 mr-2 text-atlas-cta" />
-            Calendário editorial
-          </Button>
-          <Button 
-            variant="outline" 
-            className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
-            onClick={() => handleQuickAction("Funil de vendas")}
-          >
-            <Layers className="h-4 w-4 mr-2 text-atlas-highlight" />
-            Funil de vendas
-          </Button>
+      <div className="p-4">
+        <Separator className="bg-white/10 mb-4" />
+        
+        {/* AI Recommendations */}
+        <div className="mb-4">
+          <h3 className="text-white font-medium text-sm mb-3">Recomendações da IA</h3>
+          <div className="space-y-3">
+            <Button 
+              variant="outline" 
+              className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
+              onClick={() => handleQuickAction("Análise de concorrentes")}
+            >
+              <BarChart className="h-4 w-4 mr-2 text-atlas-secondary" />
+              Análise de concorrentes
+            </Button>
+            <Button 
+              variant="outline" 
+              className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
+              onClick={() => handleQuickAction("Calendário editorial")}
+            >
+              <PenTool className="h-4 w-4 mr-2 text-atlas-cta" />
+              Calendário editorial
+            </Button>
+            <Button 
+              variant="outline" 
+              className="w-full justify-start bg-transparent border-white/10 hover:bg-white/5 text-atlas-neutral"
+              onClick={() => handleQuickAction("Funil de vendas")}
+            >
+              <Layers className="h-4 w-4 mr-2 text-atlas-highlight" />
+              Funil de vendas
+            </Button>
+          </div>
         </div>
-      </div>
-      
-      <Separator className="bg-white/10 my-6" />
-      
-      {/* Quick Actions */}
-      <div>
-        <h3 className="text-white font-medium text-sm mb-3">Ações rápidas</h3>
-        <div className="space-y-3">
-          <Button 
-            className="w-full bg-atlas-highlight/10 border border-atlas-highlight/20 hover:bg-atlas-highlight/20 text-atlas-highlight justify-start"
-            onClick={() => navigate("/documents")}
-          >
-            <Sparkles className="h-4 w-4 mr-2" />
-            Criar nova estratégia
-          </Button>
-          <Button 
-            className="w-full bg-atlas-secondary/10 border border-atlas-secondary/20 hover:bg-atlas-secondary/20 text-atlas-secondary justify-start"
-            onClick={() => handleQuickAction("Preencher campos do documento")}
-          >
-            <FileText className="h-4 w-4 mr-2" />
-            Preencher documento
-          </Button>
-          <Button 
-            className="w-full bg-atlas-cta/10 border border-atlas-cta/20 hover:bg-atlas-cta/20 text-atlas-cta justify-start"
-            onClick={() => handleQuickAction("Gerar conteúdo para post")}
-          >
-            <MessageSquare className="h-4 w-4 mr-2" />
-            Gerar conteúdo para post
-          </Button>
+        
+        <Separator className="bg-white/10 my-4" />
+        
+        {/* Quick Actions */}
+        <div className="mb-4">
+          <h3 className="text-white font-medium text-sm mb-3">Ações rápidas</h3>
+          <div className="space-y-3">
+            <Button 
+              className="w-full bg-atlas-highlight/10 border border-atlas-highlight/20 hover:bg-atlas-highlight/20 text-atlas-highlight justify-start"
+              onClick={() => navigate("/documents")}
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Criar nova estratégia
+            </Button>
+            <Button 
+              className="w-full bg-atlas-secondary/10 border border-atlas-secondary/20 hover:bg-atlas-secondary/20 text-atlas-secondary justify-start"
+              onClick={() => handleQuickAction("Preencher campos do documento")}
+            >
+              <FileText className="h-4 w-4 mr-2" />
+              Preencher documento
+            </Button>
+            <Button 
+              className="w-full bg-atlas-cta/10 border border-atlas-cta/20 hover:bg-atlas-cta/20 text-atlas-cta justify-start"
+              onClick={() => handleQuickAction("Gerar conteúdo para post")}
+            >
+              <MessageSquare className="h-4 w-4 mr-2" />
+              Gerar conteúdo para post
+            </Button>
+          </div>
         </div>
       </div>
     </div>

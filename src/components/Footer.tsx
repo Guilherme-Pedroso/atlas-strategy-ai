@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,19 +20,19 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Links Rápidos</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Planos e Preços</a></li>
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Exemplos</a></li>
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Login</a></li>
+              <li><Link to="/pricing" className="hover:text-atlas-highlight transition-colors">Planos e Preços</Link></li>
+              <li><Link to="/library" className="hover:text-atlas-highlight transition-colors">Exemplos</Link></li>
+              <li><Link to="/" className="hover:text-atlas-highlight transition-colors">Blog</Link></li>
+              <li><Link to="/login" className="hover:text-atlas-highlight transition-colors">Login</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Termos de Uso</a></li>
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Política de Privacidade</a></li>
-              <li><a href="#" className="hover:text-atlas-highlight transition-colors">Cookies</a></li>
+              <li><Link to="/termos-de-uso" className="hover:text-atlas-highlight transition-colors">Termos de Uso</Link></li>
+              <li><Link to="/politica-de-privacidade" className="hover:text-atlas-highlight transition-colors">Política de Privacidade</Link></li>
+              <li><Link to="/" className="hover:text-atlas-highlight transition-colors">Cookies</Link></li>
             </ul>
           </div>
         </div>

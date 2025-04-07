@@ -25,6 +25,10 @@ import DocumentViewer from "./pages/DocumentViewer";
 import MarketingPlanDocument from "./components/documents/templates/MarketingPlanDocument";
 import PitchDeckDocument from "./components/documents/templates/PitchDeckDocument";
 import PersonaCreatorDocument from "./components/documents/templates/PersonaCreatorDocument";
+import UserProfile from "./pages/UserProfile";
+import Settings from "./pages/Settings";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +45,8 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/politica-de-privacidade" element={<PrivacyPolicy />} />
+          <Route path="/termos-de-uso" element={<TermsOfUse />} />
           
           {/* Fluxo de onboarding e pagamento */}
           <Route path="/onboarding" element={<Onboarding />} />
@@ -56,6 +62,8 @@ const App = () => (
           <Route path="/plans" element={<Plans />} />
           <Route path="/ai-history" element={<AIHistory />} />
           <Route path="/tools" element={<Tools />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/settings" element={<Settings />} />
           
           {/* Redirecionando /index para / */}
           <Route path="/index" element={<Navigate replace to="/" />} />

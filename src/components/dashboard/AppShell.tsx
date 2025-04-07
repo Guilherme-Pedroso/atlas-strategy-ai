@@ -31,6 +31,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useToast } from "@/hooks/use-toast";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -41,6 +42,7 @@ export const AppShell = ({ children }: AppShellProps) => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const isMobile = useIsMobile();
+  const { toast } = useToast();
 
   const menuItems = [
     {
@@ -71,6 +73,14 @@ export const AppShell = ({ children }: AppShellProps) => {
     },
   ];
 
+  const handleLogout = () => {
+    toast({
+      title: "Logout realizado",
+      description: "Você foi desconectado com sucesso.",
+    });
+    navigate("/login");
+  };
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -88,7 +98,10 @@ export const AppShell = ({ children }: AppShellProps) => {
           <SidebarContent className="bg-gradient-to-b from-atlas-background to-atlas-background/95">
             <div className="px-3 pt-6 pb-2">
               <div className="flex items-center justify-between mb-6">
-                <Avatar className="h-10 w-10 border-2 border-atlas-highlight">
+                <Avatar 
+                  className="h-10 w-10 border-2 border-atlas-highlight cursor-pointer"
+                  onClick={() => navigate("/profile")}
+                >
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback className="bg-atlas-secondary/30 text-white">JD</AvatarFallback>
                 </Avatar>
@@ -135,19 +148,36 @@ export const AppShell = ({ children }: AppShellProps) => {
             <div className="mt-auto px-3 pb-6">
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton className="hover:bg-white/5">
-                    <HelpCircle className="h-4 w-4 text-atlas-neutral" />
-                    <span>Ajuda e Suporte</span>
+                  <SidebarMenuButton 
+                    className="hover:bg-white/5"
+                    onClick={() => navigate("/profile")}
+                  >
+                    <User className="h-4 w-4 text-atlas-neutral" />
+                    <span>Perfil</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton className="hover:bg-white/5">
+                  <SidebarMenuButton 
+                    className="hover:bg-white/5" 
+                    onClick={() => navigate("/settings")}
+                  >
                     <Settings className="h-4 w-4 text-atlas-neutral" />
                     <span>Configurações</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton className="hover:bg-white/5 text-atlas-cta">
+                  <SidebarMenuButton 
+                    className="hover:bg-white/5"
+                  >
+                    <HelpCircle className="h-4 w-4 text-atlas-neutral" />
+                    <span>Ajuda e Suporte</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton 
+                    className="hover:bg-white/5 text-atlas-cta"
+                    onClick={handleLogout}
+                  >
                     <LogOut className="h-4 w-4" />
                     <span>Sair</span>
                   </SidebarMenuButton>
@@ -173,7 +203,10 @@ export const AppShell = ({ children }: AppShellProps) => {
               <Button variant="ghost" size="icon" className="text-atlas-neutral">
                 <Bell className="h-5 w-5" />
               </Button>
-              <Avatar className="h-8 w-8 border-2 border-atlas-highlight">
+              <Avatar 
+                className="h-8 w-8 border-2 border-atlas-highlight"
+                onClick={() => navigate("/profile")}
+              >
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback className="bg-atlas-secondary/30 text-white">JD</AvatarFallback>
               </Avatar>

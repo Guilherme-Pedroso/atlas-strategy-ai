@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -54,6 +54,9 @@ const Header = () => {
             <Link to="/" className="text-white/80 hover:text-white transition-colors">
               Contato
             </Link>
+            <Link to="/profile" className="text-white/80 hover:text-white transition-colors">
+              <User className="h-5 w-5" />
+            </Link>
             <Button 
               className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors"
               onClick={() => navigate("/login")}
@@ -86,6 +89,9 @@ const Header = () => {
               </Link>
               <Link to="/" className="text-white/80 hover:text-white transition-colors py-2">
                 Contato
+              </Link>
+              <Link to="/profile" className="text-white/80 hover:text-white transition-colors py-2">
+                Perfil
               </Link>
               <Button 
                 className="bg-white text-atlas-background hover:bg-atlas-highlight hover:text-white transition-colors w-full"
