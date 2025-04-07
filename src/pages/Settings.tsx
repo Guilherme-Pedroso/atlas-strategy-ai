@@ -56,6 +56,7 @@ const Settings = () => {
   });
   
   // Fix: Make category parameter properly typed as a key of SettingsState
+  // and add proper type handling for the setting parameter
   const handleToggleSetting = (category: keyof SettingsState, setting: string) => {
     setSettings(prev => ({
       ...prev,
