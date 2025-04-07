@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -190,7 +189,7 @@ export const MarketingPlanDocument = () => {
             <CardContent>
               <Textarea
                 value={section.content}
-                onChange={(e) => handleContentChange(section.id, e.target.content)}
+                onChange={(e) => handleContentChange(section.id, e.target.value)}
                 className="min-h-[180px] bg-atlas-background/30 border-white/10 text-white resize-y"
                 placeholder="Conteúdo da seção..."
               />
