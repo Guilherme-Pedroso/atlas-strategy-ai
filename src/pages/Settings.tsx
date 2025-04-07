@@ -31,6 +31,9 @@ type SettingsState = {
   };
 };
 
+// Helper type to get the keys of each category's settings
+type SettingsKeys<T extends keyof SettingsState> = keyof SettingsState[T];
+
 const Settings = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -55,9 +58,8 @@ const Settings = () => {
     }
   });
   
-  // Fix: Make category parameter properly typed as a key of SettingsState
-  // and add proper type handling for the setting parameter
-  const handleToggleSetting = (category: keyof SettingsState, setting: string) => {
+  // Properly type both the category and setting parameters
+  const handleToggleSetting = <T extends keyof SettingsState>(category: T, setting: SettingsKeys<T>) => {
     setSettings(prev => ({
       ...prev,
       [category]: {
