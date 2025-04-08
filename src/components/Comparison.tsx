@@ -34,25 +34,25 @@ const ComparisonTable = () => {
       aspect: "Atualização de plano",
       traditional: "Manual, exige nova consultoria",
       atlas: "Automática, contínua com IA",
-      highlight: false
+      highlight: true
     },
     {
       aspect: "Suporte",
       traditional: "Horário comercial (e-mail lento)",
       atlas: "24/7 com IA treinada no seu negócio",
-      highlight: false
+      highlight: true
     },
     {
       aspect: "Formato",
       traditional: "PDF estático e reuniões",
       atlas: "Ferramentas interativas no seu painel",
-      highlight: false
+      highlight: true
     },
     {
       aspect: "Escopo",
       traditional: "Limitado a um projeto",
       atlas: "Evolui com sua empresa",
-      highlight: false
+      highlight: true
     }
   ];
 

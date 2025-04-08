@@ -37,7 +37,7 @@ const CallToAction = () => {
             
             <Button 
               variant="outline" 
-              className="text-base border-white/10 text-white hover:bg-white/5"
+              className="text-base border-white/10 text-black hover:scale-105"
               onClick={() => navigate("/pricing")}
             >
               Conheça nossos planos

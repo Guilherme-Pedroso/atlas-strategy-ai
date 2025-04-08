@@ -18,7 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export const DashboardContent = () => {
-  const [aiTokensUsed, setAiTokensUsed] = useState(640);
+  const [aiTokensUsed, setAiTokensUsed] = useState(800);
   const totalAiTokens = 1000;
   const aiUsagePercentage = (aiTokensUsed / totalAiTokens) * 100;
   const resetDate = new Date();
@@ -31,9 +31,9 @@ export const DashboardContent = () => {
   
   // Helper function to determine progress bar color
   const getProgressColor = (percentage: number) => {
-    if (percentage < 50) return "bg-green-500";
-    if (percentage < 80) return "bg-amber-500";
-    return "bg-red-500";
+    if (percentage < 50) return "bg-green-300";
+    if (percentage < 80) return "bg-green-300";
+    return "bg-green-500";
   };
   
   return (
@@ -46,7 +46,7 @@ export const DashboardContent = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-atlas-background/50 border-white/10">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-medium text-white flex items-center">
@@ -85,7 +85,7 @@ export const DashboardContent = () => {
               <p className="text-atlas-neutral text-sm">média por cliente</p>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
         {/* AI Usage Card */}
         <Card className="bg-atlas-background/50 border-white/10 mb-8">
@@ -94,7 +94,7 @@ export const DashboardContent = () => {
               <div className="flex items-center">
                 <Sparkles className="h-5 w-5 mr-2 text-atlas-highlight" />
                 Uso de IA Estratégica
-                <Button variant="ghost" size="icon" className="ml-1 text-atlas-neutral hover:text-white">
+                <Button variant="ghost" size="icon" className="ml-1 text-atlas-neutral hover:text-black">
                   <HelpCircle className="h-4 w-4" />
                 </Button>
               </div>
@@ -123,7 +123,7 @@ export const DashboardContent = () => {
               <div className="flex justify-between text-sm">
                 <div className="flex items-center text-atlas-neutral">
                   <Clock className="h-4 w-4 mr-1" />
-                  <span>Limite será resetado em: <span className="text-white">{formatResetDate(resetDate)}</span></span>
+                  <span>Limite será resetado em: <b><span className="text-white">{formatResetDate(resetDate)}</span></b></span>
                 </div>
                 <div className="flex items-center text-atlas-secondary hover:underline cursor-pointer">
                   <span>Ver histórico de uso</span>
@@ -145,7 +145,7 @@ export const DashboardContent = () => {
                   </div>
                   <Button 
                     variant="outline"
-                    className="bg-transparent border-white/10 text-atlas-neutral hover:text-white"
+                    className="bg-transparent border-white/10 text-atlas-neutral hover:text-black"
                     onClick={() => window.location.href = "/documents"}
                   >
                     Ver todos
@@ -206,7 +206,7 @@ export const DashboardContent = () => {
                   
                   <Button 
                     variant="outline" 
-                    className="w-full bg-transparent border-white/10 text-atlas-neutral hover:text-white"
+                    className="w-full bg-transparent border-white/10 text-atlas-neutral hover:text-black"
                   >
                     <PlusCircle className="h-4 w-4 mr-2" />
                     Adicionar atividade

@@ -214,7 +214,7 @@ const QuadrantDropzone = ({
               size="sm" 
               variant="outline" 
               onClick={() => setIsAdding(false)}
-              className="text-atlas-neutral hover:text-white"
+              className="text-black hover:text-black"
             >
               Cancelar
             </Button>
@@ -232,8 +232,8 @@ const QuadrantDropzone = ({
           variant="outline" 
           size="sm" 
           onClick={() => setIsAdding(true)}
-          className="w-full border-dashed border-white/20 text-atlas-neutral hover:text-white hover:bg-atlas-background/10"
-        >
+          className="w-full border-dashed border-white/20 text-white bg-atlas-background/10 hover:text-atlas-secon hover:bg-transparent"
+          >
           <Plus className="h-4 w-4 mr-2" />
           Adicionar item
         </Button>

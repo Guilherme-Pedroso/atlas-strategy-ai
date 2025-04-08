@@ -48,11 +48,11 @@ export const LibraryHeader = ({ searchQuery, setSearchQuery }: LibraryHeaderProp
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          <RecommendationPill text="Estratégia de conteúdo" />
-          <RecommendationPill text="Funil de vendas" />
+          <RecommendationPill text="Aproveite nossa inteligência artificial exclusiva. Treinada com milhares de data-points e que entende sua empresa!" />
+          {/* <RecommendationPill text="Funil de vendas" />
           <RecommendationPill text="SEO" />
           <RecommendationPill text="Orçamento" />
-          <RecommendationPill text="Templates de post" />
+          <RecommendationPill text="Templates de post" /> */}
         </div>
       </div>
     </header>

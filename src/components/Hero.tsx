@@ -38,7 +38,7 @@ const Hero = () => {
             
             <Button 
               variant="outline" 
-              className="text-base border-white/10 text-white hover:bg-white/5 w-full sm:w-auto"
+              className="text-base border-white/10 text-black hover:bg-white/5 w-full sm:w-auto"
               onClick={() => navigate("/pricing")}
             >
               Conheça nossos planos
@@ -50,7 +50,7 @@ const Hero = () => {
           </p>
           
           <p className="text-sm md:text-base mt-4 text-atlas-highlight font-medium max-w-2xl px-2">
-            Inclui acesso completo à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares de reais para entregar.
+            Inclui acesso completo à nossa AI treinada e à nossa biblioteca estratégica com conteúdo que grandes consultorias cobrariam milhares de reais para entregar.
           </p>
         </div>
       </div>
