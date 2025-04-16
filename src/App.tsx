@@ -18,6 +18,7 @@ import AIStrategy from "./pages/AIStrategy";
 import Plans from "./pages/Plans";
 import AIHistory from "./pages/AIHistory";
 import LandingPage from "./pages/LandingPage";
+import Whitelist from "./pages/Whitelist";
 import NotFound from "./pages/NotFound";
 import Tools from "./pages/Tools";
 import Pricing from "./pages/Pricing";
@@ -42,6 +43,7 @@ const App = () => (
           {/* Páginas públicas */}
           <Route path="/" element={<Index />} />
           <Route path="/landing" element={<LandingPage />} />
+          <Route path="/whitelist" element={<Whitelist />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

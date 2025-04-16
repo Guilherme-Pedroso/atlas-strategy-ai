@@ -31,13 +31,13 @@ export const AIMessage = ({ content, isUser, timestamp }: AIMessageProps) => {
       "flex gap-4 max-w-4xl",
       isUser ? "text-atlas-neutral" : "text-white"
     )}>
-      <div className="flex-shrink-0 mt-1">
-        <Avatar className={cn(
-          "h-8 w-8 border",
-          isUser 
-            ? "bg-atlas-neutral/20 border-atlas-neutral/50" 
-            : "bg-atlas-highlight/20 border-atlas-highlight/50"
-        )}>
+      <div className="flex-shrink-0">
+      <Avatar className={cn(
+  "h-8 w-8 border flex items-center justify-center", // 👈 adiciona isso aqui
+  isUser 
+    ? "bg-atlas-neutral/20 border-atlas-neutral/50" 
+    : "bg-atlas-highlight/20 border-atlas-highlight/50"
+)}>
           {isUser ? (
             <User className="h-4 w-4 text-atlas-neutral" />
           ) : (

@@ -68,8 +68,8 @@ const ComparisonTable = () => {
         <div className="overflow-x-auto rounded-lg shadow-lg">
           <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-atlas-background text-white">
-                <TableHead className="p-4 text-left font-bold text-white">Aspectos</TableHead>
+            <TableRow className="bg-atlas-background text-white hover:bg-atlas-background">
+            <TableHead className="p-4 text-left font-bold text-white">Aspectos</TableHead>
                 <TableHead className="p-4 text-left font-bold text-white">Consultoria Tradicional</TableHead>
                 <TableHead className="p-4 text-left font-bold text-white">Marketing Atlas</TableHead>
               </TableRow>
