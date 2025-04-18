@@ -62,7 +62,7 @@ const Whitelist = () => {
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Leva menos de 1 minuto! Investimento de tempo quase inexistente
-              para um potencial grande de retorno.
+              para um potencial grande de retorno. Aproveite.
             </p>
           </div>
           <div className="grid grid-cols-1 max-w-x mx-auto gap-6">
