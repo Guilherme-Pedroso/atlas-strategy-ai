@@ -48,12 +48,6 @@ const Header = () => {
             <Link to="/pricing" className="text-white/80 hover:text-white transition-colors">
               Preços
             </Link>
-            <Link to="/" className="text-white/80 hover:text-white transition-colors">
-              Blog
-            </Link>
-            <Link to="/" className="text-white/80 hover:text-white transition-colors">
-              Contato
-            </Link>
             <Link to="/profile" className="text-white/80 hover:text-white transition-colors">
               <User className="h-5 w-5" />
             </Link>
